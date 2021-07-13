@@ -35,7 +35,7 @@ and viewing or configuring inventory scanning.
 
 ## Tech Preview Features
 
-A new vulnerability scanner based on [Grype](https://github.com/anchore/grype) is now available in tech preview. See [Vulnerability Scanner V2]{{<ref "/docs/releasenotes/3.1.0/v2_vulnerability_scanning" >}}) for more information.
+A new vulnerability scanner based on [Grype](https://github.com/anchore/grype) is now available in tech preview. See [Vulnerability Scanner V2]({{<ref "/docs/releasenotes/3.1.0/v2_vulnerability_scanning" >}}) for more information.
 This update is not configured by default and must be set by opt-in using a configuration value.
 
 ## Enterprise Service Changes
