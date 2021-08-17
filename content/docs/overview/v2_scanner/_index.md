@@ -1,11 +1,11 @@
 ---
-title: "Tech Preview - Grype Integration"
-linkTitle: "Access"
-weight: 1
+title: "Tech Preview - v2 Vulnerability Scanner"
+linkTitle: "v2 Scanner"
+weight: 100
 ---
 
-Anchore Enterprise 3.1.0 includes a limited-functionality tech preview of an integration with [Grype](https://github.com/anchore/grype)
-for vulnerability scanning. This integration will replace the legacy vulnerability scanner in a future version of Anchore Enterprise,
+Anchore Enterprise 3.1.0 includes a limited-functionality tech preview of a new v2 scanner based on [Grype](https://github.com/anchore/grype)
+for vulnerability scanning. This integration will replace the v1 vulnerability scanner in a future version of Anchore Enterprise,
 but is provided in this release in a preview capacity so users can try it out.
 
 ***Note:*** This tech preview is not intended for use in production environments. It should be installed in sandbox exnvironments,
@@ -51,5 +51,5 @@ grype scanner back to the legacy scanner is not supported and will cause data is
 
 After making the relevant change above and redeploying, the system will start up with the grype vulnerability scanner enabled and will
 sync the latest version of grype db. Note that legacy feeds will no longer be synced while grype is configured. All vulnerability data
-and scanning will now come from the grype feed.
+and scanning will continue to come from the locally deployed feed service for Enterprise users.
 
