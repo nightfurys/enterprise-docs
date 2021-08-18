@@ -8,20 +8,20 @@ weight: 4
 
 Anchore now supports analysis of images at build time with no requirement to push images up to a registry in order for them to be analyzed and added to the system.
 
-This feature works by executing Syft inside your pipeline and giving it an endpoint and credentials to upload the results to and Anchore deployment. It will analyze the image
+This feature works by executing `anchorectl` inside your pipeline and giving it an endpoint and credentials to upload the results to and Anchore deployment. It will analyze the image
 locally for package artifacts and upload the analysis and container metadata to Anchore. The system then loads the result after which the image analysis is available for vulnerability queries
 and policy evaluations using the Anchore CLI or direct API operations.
 
 The analysis import is processed by the analyzer services, so you will see the image enter the `not_analyzed` state when first uploaded, then `analyzing` and `analyzed`. Once in the `analyzing` state the proces
 is usually very fast (seconds) since it only is operating on the provided package manifest rather than having to pull any image data or perform significant IO to unpack an image.
 
-**Important: In 3.0, Syft can only scan for packages (rpms, dpks, npms, gems, jars, and others, but *not* including NuGet packages or Windows container support) but does not perform the deeper filesystem analysis that the Anchore Analyzers do, for example malware scanning, so 
+**Important: In 3.1 `anchorectl` can only scan for packages (rpms, dpks, npms, gems, jars, and others, but *not* including NuGet packages or Windows container support) but does not perform the deeper filesystem analysis that the Anchore Analyzers do, for example malware scanning, so 
 the policy check functionality is more limited since there is less analysis data. However, vulnerability checks and vulnerability policies are full featured.
 
 ### Example
 
 ```
-❯ syft ubuntu:latest -u admin -p foobar -H http://localhost:8228
+❯ anchorectl ubuntu:latest -u admin -p foobar -H http://localhost:8228
  ✔ Loaded image
  ✔ Parsed image
  ✔ Cataloged image      [92 packages]
@@ -147,7 +147,7 @@ Tag Detected At: 2021-02-01T20:54:46Z
 
 ### Next Steps
 
-Install [Syft](http://github.com/anchore/syft) to scan local images and generate software Bill-of-Materials to upload into your Anchore deployment.
+Install [anchorectl]({{< ref "/docs/installation/anchorectl" >}}). to scan local images and generate software Bill-of-Materials to upload into your Anchore deployment.
 
 After uploading the analysis, you'll need to use the CLI or UI to view vulnerabilities or policy evaluations using the enterprise feed data and policy features
 such as [base-image diffs]({{< ref "/docs/overview/concepts/images/base_images" >}}) or [false positive management]({{< ref "/docs/overview/concepts/images/false_positive_management" >}}) 
