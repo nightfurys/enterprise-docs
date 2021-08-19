@@ -15,7 +15,7 @@ volumes:
 services:
   # The primary API endpoint service
   api:
-    image: docker.io/anchore/enterprise:v3.1.0
+    image: docker.io/anchore/enterprise:v3.1.1
     depends_on:
       - anchore-db
       - catalog
@@ -42,7 +42,7 @@ services:
     command: ["anchore-enterprise-manager", "service", "start",  "apiext"]
   # Catalog is the primary persistence and state manager of the system
   catalog:
-    image: docker.io/anchore/enterprise:v3.1.0
+    image: docker.io/anchore/enterprise:v3.1.1
     depends_on:
       - anchore-db
     volumes:
@@ -67,7 +67,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "catalog"]
   queue:
-    image: docker.io/anchore/enterprise:v3.1.0
+    image: docker.io/anchore/enterprise:v3.1.1
     depends_on:
       - anchore-db
       - catalog
@@ -91,7 +91,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "simplequeue"]
   policy-engine:
-    image: docker.io/anchore/enterprise:v3.1.0
+    image: docker.io/anchore/enterprise:v3.1.1
     depends_on:
       - anchore-db
       - catalog
@@ -121,7 +121,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "policy_engine"]
   analyzer:
-    image: docker.io/anchore/enterprise:v3.1.0
+    image: docker.io/anchore/enterprise:v3.1.1
     depends_on:
       - anchore-db
       - catalog
@@ -160,7 +160,7 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
   rbac-authorizer:
-    image: docker.io/anchore/enterprise:v3.1.0
+    image: docker.io/anchore/enterprise:v3.1.1
     volumes:
       - ./license.yaml:/license.yaml:ro
       #- ./config-enterprise.yaml:/config/config.yaml:z
@@ -184,7 +184,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "rbac_authorizer"]
   rbac-manager:
-    image: docker.io/anchore/enterprise:v3.1.0
+    image: docker.io/anchore/enterprise:v3.1.1
     volumes:
       - ./license.yaml:/license.yaml:ro
       #- ./config-enterprise.yaml:/config/config.yaml:z
@@ -210,7 +210,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "rbac_manager"]
   reports:
-    image: docker.io/anchore/enterprise:v3.1.0
+    image: docker.io/anchore/enterprise:v3.1.1
     volumes:
       - ./license.yaml:/license.yaml:ro
       #- ./config-enterprise.yaml:/config/config.yaml:z      
@@ -236,7 +236,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "reports"]
   notifications:
-    image: docker.io/anchore/enterprise:v3.1.0
+    image: docker.io/anchore/enterprise:v3.1.1
     volumes:
       - ./license.yaml:/license.yaml:ro
       #- ./config-enterprise.yaml:/config/config.yaml:z      
@@ -273,7 +273,7 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "redis-cli PING"]
   ui:
-    image: docker.io/anchore/enterprise-ui:v3.1.0
+    image: docker.io/anchore/enterprise-ui:v3.1.1
     volumes:
       - ./license.yaml:/license.yaml:ro
       #- ./config-ui.yaml:/config/config-ui.yaml:z
@@ -311,7 +311,7 @@ services:
 #    healthcheck:
 #      test: ["CMD-SHELL", "pg_isready -U postgres"]
 #  feeds:
-#    image: docker.io/anchore/enterprise:v3.1.0
+#    image: docker.io/anchore/enterprise:v3.1.1
 #    volumes:
 #      - feeds-workspace-volume:/workspace
 #      - ./license.yaml:/license.yaml:ro
@@ -330,9 +330,8 @@ services:
 #      - ANCHORE_DB_PASSWORD=mysecretpassword
 #      - ANCHORE_ENABLE_METRICS=false
 #      - ANCHORE_LOG_LEVEL=INFO
-#      # Uncomment the following to enable Microsoft msrc driver. Follow https://portal.msrc.microsoft.com/en-us/developer to generate an API key
+#      # Uncomment the following to enable Microsoft msrc driver.
 #      - ANCHORE_ENTERPRISE_FEEDS_MSRC_DRIVER_ENABLED=true
-#      - ANCHORE_ENTERPRISE_FEEDS_MSRC_DRIVER_API_KEY=${ANCHORE_MSRC_KEY}
 #      # Uncomment ANCHORE_ENTERPRISE_FEEDS_GITHUB_DRIVER_TOKEN for github driver.
 #      # Generate token with https://github.com/settings/tokens/new?scopes=user,public_repo,repo,repo_deployment,repo:status,read:repo_hook,read:org,read:public_key,read:gpg_key
 #      # and assign the value to environment variable
