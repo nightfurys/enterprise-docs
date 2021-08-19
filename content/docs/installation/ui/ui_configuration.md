@@ -94,7 +94,7 @@ be provided (additional items will be excluded). The top-level `title` key
 provided the label for the menu (if present, otherwise the string "Custom
 External Links" will be used instead).
 
-    Each link entry must have a title of greater than 0-length and a valid URI.
+  Each link entry must have a title of greater than 0-length and a valid URI.
 If either item is invalid, the entry will be excluded.
 
     ```
@@ -122,6 +122,41 @@ If either item is invalid, the entry will be excluded.
       - title: Example Link 10
         uri: https://example.com
     ```
+
+* The (optional) `force_websocket` key specifies if the WebSocket protocol must
+be used for socket message communications. By default, long-polling is
+initially used to establish the handshake between client and web service,
+followed by a switch to WS if the WebSocket protocol is supported. 
+
+  If this value is unset, or is set to anything other than a Boolean, the web
+service will default to `False`.
+
+  This value can be overridden by using the `ANCHORE_FORCE_WEBSOCKET`
+environment variable.
+
+    ```
+    force_websocket: False
+    ```
+
+* The (optional) `authentication_lock` keys specify if a user should be
+temporarily prevented from logging in to an account after one or more failed
+authentication attempts. For this feature to be enabled, both values must be
+whole numbers greater than `0`. They can be overridden by using the
+`ANCHORE_AUTHENTICATION_LOCK_COUNT` and `ANCHORE_AUTHENTICATION_LOCK_EXPIRES`
+environment variables.
+
+  The `count` value represents the number of failed authentication attempts
+allowed to take place before a temporary lock is applied to the username. The
+`expires` value represents, in seconds, how long the lock will be applied for.
+
+  Note that, for security reasons, when this feature is enabled it will be
+applied to *any* submitted username, regardless of whether the user exists.
+
+  ```
+  authentication_lock:
+    count: 5
+      expires: 300
+  ```
 
 * The (optional) `enable_add_repositories` key specifies if repositories can be
 added via the application interface by either administrative users or standard
