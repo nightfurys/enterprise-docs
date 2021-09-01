@@ -1,6 +1,6 @@
 ---
-title: "Trouble Shooting"
-linkTitle: "Trouble Shooting"
+title: "Troubleshooting"
+linkTitle: "Troubleshooting"
 weight: 9
 ---
 
