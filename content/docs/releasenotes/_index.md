@@ -3,6 +3,7 @@ title: "Anchore Enterprise Release Notes"
 linkTitle: "Release Notes"
 weight: 8
 ---
+* [Anchore Enterprise Version 3.1.2]({{< ref "/docs/releasenotes/312.md" >}})
 * [Anchore Enterprise Version 3.1.1]({{< ref "/docs/releasenotes/311.md" >}})
 * [Anchore Enterprise Version 3.1.0]({{< ref "/docs/releasenotes/3.1.0" >}})
 * [Anchore Enterprise Version 3.0.3]({{< ref "/docs/releasenotes/303.md" >}})
