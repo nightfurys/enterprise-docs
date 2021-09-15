@@ -85,7 +85,7 @@ Full Tag: docker.io/mysql:5
 
 ### Deleting An Image
 
-The `image del` command instructs Anchore Enterprise to delete the image from the repository.
+The `image del` command instructs Anchore Enterprise to delete the image analysis from the working set.
 
 #### Get The Image Digest
 
