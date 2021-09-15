@@ -21,7 +21,7 @@ curl -o anchorectl.dmg https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0
 
 #### macOS Tar
 ```shell script
-curl -o anchorectl.dmg https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.2/anchorectl_0.1.2_darwin_amd64.tar.gz
+curl -o anchorectl.tar.gz https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.2/anchorectl_0.1.2_darwin_amd64.tar.gz
 ```
 
 
