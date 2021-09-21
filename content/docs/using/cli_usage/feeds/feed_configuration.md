@@ -17,18 +17,23 @@ For most users the only configuration option that is typically updated is the fe
       ...
       feed_sync: 14400
 ```
+### Feed Settings - Grype
+By default, Anchore Enterprise syncs the Grype feed.
+The Grype feed will contain the records from all the other groups. It is not possible to include or exclude groups from the Grype feed.
+VulnDB and Microsoft feed data is not yet supported for the tech preview Grype vulnerability scanner. Those feeds will not be synced.
 
-### Feed Settings
+
+### Feed Settings - Legacy
 
 Feed sync configuration is set in the config.yaml file used by policy engine service. The `services.policy_engine.vulnerabilities.sync.data` section
 of the configuration file in the policy engine's container controls the behavior of feed syncs done by that particular container. Note that the location
 and format of this config data changed slightly in Anchore Engine 0.10 to reflect some internal refactoring.  Ensure this config is synchronized between
 containers if you are running more than one policy engine. This is usually handled for you by Helm Charts on Kubernetes, for example.
 
-The Anchore Engine will default to downloading feed data from Anchore's feed service hosted at https://ancho.re/v1/service/feeds and running in AWS in the
+Anchore Enterprise will default to downloading feed data from Anchore's feed service hosted at https://ancho.re/v1/service/feeds and running in AWS in the
 us-west-2 region.
 
-By default, Anchore Engine will only sync the non-grype feeds enabled in the config section shown below. Setting additional feed types to true or false will
+For legacy, by default, Anchore Enterprise will only sync the non-grype feeds enabled in the config section shown below. Setting additional feed types to true or false will
 enable or disable, respectively, synchronization of the specified feed.
 
 ```
@@ -58,7 +63,7 @@ services:
 #### Read Timeout
 
 Under rare circumstances you may see syncs failing with errors to fetch data due to timeouts. This is typically due to load on the feed service, network issues, or
-some other temporary condition. However, if you want to increase the timeout to increate the likelihood of success, modify the _read_timeout_seconds_ of the feeds configuration:
+some other temporary condition. However, if you want to increase the timeout to increase the likelihood of success, modify the _read_timeout_seconds_ of the feeds configuration:
 
 ```
 feeds:
@@ -68,7 +73,7 @@ feeds:
 
 ### Controlling Which Feeds and Groups are Synced
 
-Note: The package and nvd data feeds are large, resulting in the initial sync taking some time time.
+Note: The package and nvd data feeds are large, resulting in the initial sync taking some time to sync.
 
 During initial feed sync, you can always query the progress and status of the feed sync using the anchore-cli.
 
@@ -315,11 +320,6 @@ vulnerabilities        ubuntu:19.04           success        0                  
 vulnerabilities        ubuntu:19.10           success        0                      0.60s                         
 ```
 
-***Note:*** If the tech preview Grype vulnerability scanner is enabled, the Grype feed is the only feed that will be synced. It will
-contain the records from all the other groups. It is not possible to include or exclude groups from the Grype feed.
-
-VulnDB and Micrsoft feed data is not yet support for the tech preview Grype vulnerability scanner. Those feeds will not be synced.
-
 #### Deleting Specific Feed Groups
 
 ```
@@ -407,5 +407,5 @@ vulnerabilities        centos:5               success        1347               
 
 ```
 
-With these controls you can better customize the data set that anchore stores in the db. However, note that this should not normally be necessary
-and modifying feed groups & data has implication on the sets of distros and types of artifacts Anchore can match vulnerabilities against.
+With these controls you can better customize the data set that anchore stores in the database. However, note that this should not normally be necessary
+and modifying feed groups and data has implications on the sets of distros and types of artifacts Anchore can match vulnerabilities against.
