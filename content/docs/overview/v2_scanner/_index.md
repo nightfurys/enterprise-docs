@@ -1,5 +1,5 @@
 ---
-title: "Tech Preview - v2 Vulnerability Scanner"
+title: "V2 Vulnerability Scanner"
 linkTitle: "v2 Scanner"
 weight: 100
 ---
