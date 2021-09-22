@@ -8,9 +8,9 @@ Upgrading from one version of Anchore Enterprise to another is normally handled 
 trial docker-compose configuration files that are provided along with each release. Those follow the general methods from this guide. 
 See [Specific Instructions](#specific-versions) section for special instructions related to specific versions.
 
-You can keep the legacy vulnerability scanner while using Enterprise 3.2.0, you just need to specifically configure Anchore Enterprise to use the legacy scanner. 
+When upgrading to Anchore Enterprise 3.2.0, you will retain your previous vulnerability scanner setting. You will need to follow the linked instructions for upgrading to the new vulnerability scanner.  
 
-***Note:*** The legacy vulnerability scanner will be removed in a future release.
+***Note:*** The legacy vulnerability scanner will be removed in a future release, so upgrading to the V2 vulnerability scanner is strongly encouraged.
 
 Anchore is distributed as a docker image, which is composed of smaller micro-services that can be deployed in a single container or scaled out to handle load.
 
