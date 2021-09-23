@@ -8,7 +8,17 @@ Upgrading from one version of Anchore Enterprise to another is normally handled 
 trial docker-compose configuration files that are provided along with each release. Those follow the general methods from this guide. 
 See [Specific Instructions](#specific-versions) section for special instructions related to specific versions.
 
-When upgrading to Anchore Enterprise 3.2.0, you will retain your previous vulnerability scanner setting. You will need to follow the linked instructions for upgrading to the new vulnerability scanner.  
+### Upgrade scenarios
+
+See the following scenarios when upgrading from an earlier version of Enterprise to 3.2.0.
+
+- If you are upgrading from an earlier version of Enterprise with the legacy scanner configured, then Enterprise 3.2.0 will continue to respect that configured (legacy) scanner.
+
+- If you are upgrading from an earlier version of Enterprise without the scanner configured, then Enterprise 3.2.0 will notice that it is an upgrade and default to the V1 vulnerability scanner (legacy), just as the previous instance defaulted to.
+
+- If you have Enterprise 3.2.0 that is using the V1 vulnerability scanner (legacy), either configured or because of an upgrade, you can follow the directions to configure it to the new V2 vulnerability scanner (based on Grype) and switch to it. But if you switch to the V2 scanner, you cannot revert back to the V1 legacy scanner unless you do a fresh install with the V1 scanner configured.
+
+- If you choose not to upgrade, instead performing a new installation of 3.2.0, you will have the V2 vulnerability scanner (based on Grype) configured by default. 
 
 ***Note:*** The legacy vulnerability scanner will be removed in a future release, so upgrading to the V2 vulnerability scanner is strongly encouraged.
 
@@ -113,6 +123,17 @@ This section is intended as a guide for any special instructions and information
 
 The major change between 3.1.0 and 3.2.0. is that Anchore Enterprise is fully integrated with Grype by default for vulnerability scanning. The V2 vulnerability scanner, based on Grype, replaces the legacy vulnerability scanner in previous versions of Anchore Enterprise.
 
+See the following scenarios when upgrading from Enterprise 3.1.0 to 3.2.0.
+
+- If you are upgrading from Enterprise 3.1.0 with the legacy scanner configured, then Enterprise 3.2.0 will continue to respect that configured (legacy) scanner.
+
+- If you are upgrading from Enterprise 3.1.0 without the scanner configured, then Enterprise 3.2.0 will notice that it is an upgrade and default to the V1 vulnerability scanner (legacy), just as the 3.1.0 instance defaulted to.
+
+- If you have Enterprise 3.2.0 that is using the V1 vulnerability scanner (legacy), either configured or because of an upgrade, you can follow the directions to configure it to the new V2 vulnerability scanner (based on Grype) and switch to it. But if you switch to the V2 scanner, you cannot revert back to the V1 legacy scanner unless you do a fresh install with the V1 scanner configured.
+
+- If you choose not to upgrade, instead performing a new installation of 3.2.0, you will have the V2 vulnerability scanner (based on Grype) configured by default. 
+
+***Note:*** The legacy vulnerability scanner will be removed in a future release, so upgrading to the V2 vulnerability scanner is strongly encouraged.
 
 ### Upgrading Enterprise 2.3 to 2.4+
 
