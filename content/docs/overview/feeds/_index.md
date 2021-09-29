@@ -6,7 +6,7 @@ weight: 4
 
 ### Overview
 
-Anchore Enterprise Feeds is an On-Premises service that supplies os and non-os vulnerability data and package data for consumption by Anchore Engine. Policy Engine, a service component of Anchore Engine, uses this data for finding vulnerabilities and evaluating policies. Read more about how Anchore Engine manages feed data [here]({{< ref "/docs/using/cli_usage/feeds" >}}) 
+Anchore Enterprise Feeds is an On-Premises service that supplies operating system and non-operating system vulnerability data and package data for consumption by Anchore Engine. Policy Engine, a service component of Anchore Engine, uses this data for finding vulnerabilities and evaluating policies. Read more about how Anchore Engine manages feed data [here]({{< ref "/docs/using/cli_usage/feeds" >}}). 
 
 Anchore maintains a public and free feed service at https://ancho.re/v1/service/feeds which is used by open source Anchore Engine. Anchore Enterprise Feeds offers the following benefits over the free service:
 
@@ -25,13 +25,7 @@ Anchore Enterprise Feeds has three high level components:
 * API -- Serves the data to clients, supporting update-only fetches.
 
 ### Grype
-Anchore Enterprise 3.1 includes a limited-functionality tech preview of an integration with [Grype](https://github.com/anchore/grype) for vulnerability
-scanning. This integration will replace the legacy vulnerability scanner in a future version of Anchore Engine, but is provided here in a preview capacity
-so users can try it out.
-
-***Note:*** This tech preview is not intended for use in production environments. It should be installed in sandbox environments, and is strictly provided
-here to give users an early, hands-on preview of the feature. It may not include all the functionality of the legacy scanner. Please report any issues
-found with it to Anchore Support.
+As of Anchore Enterprise 3.2.0, Anchore Enterprise is fully integrated with [Grype](https://github.com/anchore/grype) by default for vulnerability scanning. The V2 vulnerability scanner, based on Grype, replaces the legacy vulnerability scanner in previous versions of Anchore Enterprise.
 
 
 #### Drivers
@@ -47,6 +41,7 @@ All drivers except for the package drivers are enabled by default. The service h
 
 | Driver | Feed Type | External Data Source |
 | :------ | :----------- | :---------- |
+| suse | vulnerabilities | https://www.suse.com/support/security/oval/ |
 | alpine | vulnerabilities | https://github.com/alpinelinux/alpine-secdb/archive/master.tar.gz |
 | rhel | vulnerabilities | https://access.redhat.com/hydra/rest/securitydata/cve.json |
 | centos (deprecated) | vulnerabilities | https://www.redhat.com/security/data/oval/com.redhat.rhsa-all.xml.bz2 |
@@ -74,4 +69,4 @@ Anchore Enterprise Feeds exposes a RESTful API. It accepts client requests and s
 
 ### Configuration
 
-[Click here]({{< ref "/docs/installation/feeds" >}}) to read about installation requirements for an air-gapped deployment and optional configuraiton of drivers    
+[Click here]({{< ref "/docs/installation/feeds" >}}) to read about installation requirements for an air-gapped deployment and optional configuration of drivers    

@@ -12,7 +12,9 @@ The API is read-only and does not require any authentication.
 
 ### Feed Data API
 
-Data is organized into 'feeds' and 'groups' within a given feed. A feed is a semantic grouping of data but allows different schemas for the data within each group of the feed and allows for finer-grained updates by allowing clients to select the data of interest.
+The Grype feed will be the only feed synced. This feed replaces the other feeds and contains the groups records enabled for your Anchore Enterprise instance.
+
+For legacy feeds, data is organized into 'feeds' and 'groups' within a given feed. A feed is a semantic grouping of data but allows different schemas for the data within each group of the feed and allows for finer-grained updates by allowing clients to select the data of interest.
 
 Examples of feeds:
 
@@ -20,12 +22,7 @@ Examples of feeds:
 - packages - Metadata and manifests for upstream application packages, such as npmjs.org and rubygems.org
 - nvd - NIST National Vulnerability Database records (CVEs)
 
-
-***Note:*** If the [tech preview Grype vulnerability scanner]({{< ref "/docs/overview/v2_scanner" >}}) is enabled, the grype feed
-will be the only feed synced. This feed replaces the other feeds and contains the groups records enabled for your
-Anchore Enterprise instance.
-
-Following examples highlight the routes exposed by the service for querying feed data:
+The following examples highlight the routes exposed by the service for querying feed data:
 
 * List the available feeds:
 
@@ -96,7 +93,7 @@ Following examples highlight the routes exposed by the service for querying feed
     }        
     ```
 
-Responses are paginated and return only up to 1000 records in each page. If there are more than 1000 records in the result set, the server responds with a truncated set of results and a marker encoded in next_token. The client must invoke the request with next_token as a path parameter to receive the next page of results and so on. An empty value for next_token is an indication that the service has exhausted the results for the query
+Responses are paginated and return only up to 1000 records in each page. If there are more than 1000 records in the result set, the server responds with a truncated set of results and a marker encoded in next_token. The client must invoke the request with next_token as a path parameter to receive the next page of results and so on. An empty value for next_token is an indication that the service has exhausted the results for the query.
 
 ```
 $ curl "http://feeds.example.com:8448/v1/feeds/vulnerabilities/debian:9?next_token=MjAxOC0wMi0xNFQyMTowNToxNC40NjIwMjU="

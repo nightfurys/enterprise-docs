@@ -5,25 +5,21 @@ weight: 4
 ---
 
 
-As of Enterprise 2.3.0, Anchore can analyze and provide vulnerability matches for Windows images. Anchore downloads, unpacks, and analyzes the windows image contents in a similar
-way, it does Linux-based images, providing OS information as well as discovered application packages like npms, gems, python, NuGet, and java archives.
+Anchore can analyze and provide vulnerability matches for Microsoft Windows images. Anchore downloads, unpacks, and analyzes the Microsoft Windows image contents similar to Linux-based images, providing OS information as well as discovered application packages like npms, gems, python, NuGet, and java archives.
 
-Vulnerabilities for Windows images are matched against the detected OS version and KBs detected installed in the image. These are matched using data from the Microsoft Security Research Center (MSRC) data API.
+Vulnerabilities for Microsoft Windows images are matched against the detected operating system version and KBs installed in the image. These are matched using data from the Microsoft Security Research Center (MSRC) data API.
 
 ### Requirements
 
-Analyzing windows images is supported out-of-the-box with no configuration changes, but to get vulnerability results, your deployment must:
+Analyzing Microsoft Windows images is supported out-of-the-box with no configuration changes - but to get vulnerability results, your deployment must meet the following criteria:
 
 1. Deploy an on-premises feed service
 1. Have the _microsoft_ driver enabled in the feed service
-1. The driver must have an API key configured for accessing Microsoft's MSRC vulnerability data API
 1. The policy engine must have the _microsoft_ feed enabled to be synced from the feed service
-
-***Note:*** Windows image analysis is not yet available for the tech preview Grype vulnerability scanner. It will be added in a future release.
 
 ### Configuring Microsoft Feeds
 
-In the feed service configuration, enable the _msrc_ driver and provide an api_key.
+In the feed service configuration, enable the _msrc_ driver.
 
 ```
 services:
@@ -33,17 +29,7 @@ services:
       ...
       msrc:
         enabled: true
-        api_key: <api key string obtained from signing-up at https://portal.msrc.microsoft.com/en-us/developer>
 ```
-
-Getting an API Key
-
-1. Visit: https://portal.msrc.microsoft.com/en-us/developer
-1. Create an account or sign-in with GitHub
-1. Once logged-in, click 'Create New Key'
-1. You should now see a screen with the title "Microsoft Security Update API". Directly below that is "API Key", click "Show" and copy that value into your configuration file. Example:
-
-![Microsoft Security Update API](MsrcApiKeySelect.png)
 
 
 ### Enabling the Feed in the Policy Engine
@@ -111,9 +97,9 @@ Windows containers: _Windows_, _ServerCore_, _NanoSerer_, and _IoTCore_
 | 11715 | Windows Server, version 1909 (Server Core installation) |
 
 
-### Windows OS Packages
+### Windows Operating System Packages
 
-Just as Linux images are scanned for packages such as RPMs, DPKG, and APK, Windows images are scanned for the installed components and Knowlege Base patches (KBs). When listing OS content on a Windows image, the results returned are KB identifiers that are numeric. Both the name and version will
+Just as Linux images are scanned for packages such as RPMs, DPKG, and APK, Windows images are scanned for the installed components and Knowledge Base patches (KBs). When listing operating system content on a Microsoft Windows image, the results returned are KB identifiers that are numeric. Both the name and version will
 be identical and are the KB IDs.
 
 

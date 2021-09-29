@@ -8,7 +8,21 @@ Upgrading from one version of Anchore Enterprise to another is normally handled 
 trial docker-compose configuration files that are provided along with each release. Those follow the general methods from this guide. 
 See [Specific Instructions](#specific-versions) section for special instructions related to specific versions.
 
-Anchore is distributed as a docker image, which is comprised of smaller micro-services that can be deployed in a single container or scaled out to handle load.
+### Upgrade scenarios
+
+See the following scenarios when upgrading from an earlier version of Enterprise to 3.2.0.
+
+- If you are upgrading from an earlier version of Enterprise with the legacy scanner configured, then Enterprise 3.2.0 will continue to respect that configured (legacy) scanner.
+
+- If you are upgrading from an earlier version of Enterprise without the scanner configured, then Enterprise 3.2.0 will notice that it is an upgrade and default to the V1 vulnerability scanner (legacy), just as the previous instance defaulted to.
+
+- If you have Enterprise 3.2.0 that is using the V1 vulnerability scanner (legacy), either configured or because of an upgrade, you can follow the directions to configure it to the new V2 vulnerability scanner (based on Grype) and switch to it. But if you switch to the V2 scanner, you cannot revert back to the V1 legacy scanner unless you do a fresh install with the V1 scanner configured.
+
+- If you choose not to upgrade, instead performing a new installation of 3.2.0, you will have the V2 vulnerability scanner (based on Grype) configured by default. 
+
+***Note:*** The legacy vulnerability scanner will be removed in a future release, so upgrading to the V2 vulnerability scanner is strongly encouraged.
+
+Anchore is distributed as a docker image, which is composed of smaller micro-services that can be deployed in a single container or scaled out to handle load.
 
 The latest version of the Anchore image will be tagged with both the latest tag and a version number. For example **latest** and **v0.7.1**.
 
@@ -28,7 +42,7 @@ In this example the Anchore version is 0.7.0 and the database schema is version 
 
 ### Pre-upgrade Procedure
 
-Prior to upgrading Anchore, we highly recommend performing a database backup/snapshot by stopping your Anchore installation, and backing up the database in its entirely.  There is no automatic downgrade capability, thus the only way to downgrade after an upgrade (whether it succeeds or fails) is to restore your database contents to a state from a prior version of Anchore, and explicitly run the compatible version of Anchore against the corresponding database contents. 
+Prior to upgrading Anchore, we highly recommend performing a database backup/snapshot by stopping your Anchore installation, and backing up the database in its entirety.  There is no automatic downgrade capability, thus the only way to downgrade after an upgrade (whether it succeeds or fails) is to restore your database contents to a state from a prior version of Anchore, and explicitly run the compatible version of Anchore against the corresponding database contents. 
 
 Whether or not you wish to have the ability to downgrade, we recommend backing up your Anchore database prior to upgrading the software as a best practice.
 
@@ -98,12 +112,28 @@ If for any reason the automated upgrade fails, or you would like to perform the 
 ...
 ...
 ```
-- The output will indicate whether or not a DB upgrade is needed, prompt for confirmation if it is, and will display upgrade progress output before completing.
+- The output will indicate whether or not a database upgrade is needed. It will then prompt for confirmation if it is, and will display upgrade progress output before completing.
 
 
 ## Specific Version Upgrades {#specific-versions}
 ---
 This section is intended as a guide for any special instructions and information related to upgrading to specific versions of Enterprise.
+
+### Upgrading Enterprise 3.1.1 to 3.2.0
+
+The major change between 3.1.0 and 3.2.0. is that Anchore Enterprise is fully integrated with Grype by default for vulnerability scanning. The V2 vulnerability scanner, based on Grype, replaces the legacy vulnerability scanner in previous versions of Anchore Enterprise.
+
+See the following scenarios when upgrading from Enterprise 3.1.0 to 3.2.0.
+
+- If you are upgrading from Enterprise 3.1.0 with the legacy scanner configured, then Enterprise 3.2.0 will continue to respect that configured (legacy) scanner.
+
+- If you are upgrading from Enterprise 3.1.0 without the scanner configured, then Enterprise 3.2.0 will notice that it is an upgrade and default to the V1 vulnerability scanner (legacy), just as the 3.1.0 instance defaulted to.
+
+- If you have Enterprise 3.2.0 that is using the V1 vulnerability scanner (legacy), either configured or because of an upgrade, you can follow the directions to configure it to the new V2 vulnerability scanner (based on Grype) and switch to it. But if you switch to the V2 scanner, you cannot revert back to the V1 legacy scanner unless you do a fresh install with the V1 scanner configured.
+
+- If you choose not to upgrade, instead performing a new installation of 3.2.0, you will have the V2 vulnerability scanner (based on Grype) configured by default. 
+
+***Note:*** The legacy vulnerability scanner will be removed in a future release, so upgrading to the V2 vulnerability scanner is strongly encouraged.
 
 ### Upgrading Enterprise 2.3 to 2.4+
 
@@ -116,7 +146,7 @@ Detailed instructions are available in the [anchore-charts git repo](https://git
 ### Upgrading Enterprise 2.2 (Image anchore/enterprise:v0.6.1) to 2.3.0
 
 
-**NOTE: This upgrade involves a DB schema update from 0.0.12 -> 0.0.13 for the Engine-based components. The upgrade process migrates some data from the 
+**NOTE: This upgrade involves a database schema update from 0.0.12 -> 0.0.13 for the Engine-based components. The upgrade process migrates some data from the 
 old centos feed using RHSA data to the new rhel feed using CVE data and may take 10+ minutes since image results are updated and the feeds are configured 
 for the new data. The specific time will depend on your deployment resources and the images in your database. More RHEL/CentOS images will take longer 
 to process.**
@@ -124,7 +154,7 @@ to process.**
 As with previous upgrades, the new version of the Helm chart coinciding with the release includes all necessary updates to the configuration to support 
 Enterprise 2.3.0. The specific changes it includes are:
 
-* Uses a specific post-upgrade hook for performing the DB upgrade rather than doing it during bootstrap of any one service. This ensures a cleaner 
+* Uses a specific post-upgrade hook for performing the database upgrade rather than doing it during bootstrap of any one service. This ensures a cleaner 
 upgrade experience with specific upgrade logs available in the upgrade job's container logs.
 
 
@@ -157,8 +187,7 @@ The upgrade process itself remains the same:
 
 1. Shut down the previous deployment
 
-1. Update the chart to the newest version (usually requires a `helm repo update` to fetch the newest version). Then, start the new deployment. The DB 
-will upgrade automatically as part of the deployment.
+1. Update the chart to the newest version (usually requires a `helm repo update` to fetch the newest version). Then, start the new deployment. The database will upgrade automatically as part of the deployment.
 
 ### Additional Steps for the RHSA -> CVE Change in 2.3.0
 
@@ -174,8 +203,8 @@ only CVE matches against the new data.
 
 The new version of the Helm chart for Anchore Engine/Enterprise has a few significant changes:
 
-1. Explicit db upgrade process executed via 2 post-upgrade hook jobs. These will run and execute the db schema upgrade while the new versions of the 
-service pods wait for the db schema to be updated.
+1. Explicit database upgrade process executed via 2 post-upgrade hook jobs. These will run and execute the database schema upgrade while the new versions of the 
+service pods wait for the database schema to be updated.
 
 Doing the upgrade:
 
