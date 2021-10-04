@@ -150,7 +150,7 @@ services:
   anchore-db:
     image: "postgres:9"
     volumes:
-      - anchore-enterprsie-3.2-db:/var/lib/postgresql/data
+      - anchore-enterprise-3.2-db:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=mysecretpassword
     expose:
