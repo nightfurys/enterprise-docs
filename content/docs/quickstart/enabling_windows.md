@@ -4,11 +4,11 @@ linkTitle: "Enabling Windows in Quickstart"
 weight: 1
 ---
 
-To enable windows support in the quickstart install docker-compose.yaml file you must:
+To enable Microsoft Windows support in the quickstart install docker-compose.yaml file you must:
 
 1. Go to the directory where you have the quickstart docker-compose.yaml downloaded. Or, see [Quickstart]({{< ref "/docs/quickstart" >}}) for download and setup instructions.
 
-1. If your system is already running, shut it down: `docker-compose down` (NOTE: do **NOT** use the `-v` option or that will delete your database and reset the systeme entirely)
+1. If your system is already running, shut it down: `docker-compose down` (NOTE: do **NOT** use the `-v` option or that will delete your database and reset the system entirely).
 
 1. Enable the feeds service to run. Uncomment the feeds service and enterprise-feeds-db services in docker-compose.yaml
 
@@ -64,9 +64,9 @@ To enable windows support in the quickstart install docker-compose.yaml file you
 
     ```
 
-***Note:*** Windows image analysis is not yet available for the tech preview Grype vulnerability scanner. It will be added in a future release.
+***Note:*** Microsoft Windows image analysis is available for the V2 vulnerability scanner based on Grype.
 
-1. Configure the policy engine to use the deployed feed service instead of the hosted feed service, and enable the microsoft feed by uncommenting the ANCHORE_FEEDS_MICROSOFT_ENABLED variable
+1. Configure the policy engine to use the deployed feed service instead of the hosted feed service, and enable the Microsoft feed by uncommenting the ANCHORE_FEEDS_MICROSOFT_ENABLED variable
 
     Ensure the following environment variables are set in the docker-compose.yaml file:
 
@@ -81,7 +81,7 @@ To enable windows support in the quickstart install docker-compose.yaml file you
           - ANCHORE_FEEDS_URL=http://feeds:8228/v1/feeds
           - ANCHORE_FEEDS_CLIENT_URL=null
           - ANCHORE_FEEDS_TOKEN_URL=null
-          # Uncomment the next variable in addition to enabling the on-prem feed service just above, to enable syncing of the MSRC data feeds for windows scanning support.
+          # Uncomment the next variable in addition to enabling the on-prem feed service just above, to enable syncing of the MSRC data feeds for Microsoft Windows scanning support.
           - ANCHORE_FEEDS_MICROSOFT_ENABLED=true
       ...
     ```
@@ -96,6 +96,6 @@ To enable windows support in the quickstart install docker-compose.yaml file you
 
 will show 'microsoft' feed, with 'msrc' group data entries. In addition, you can verify with `anchore-cli event list` to show a feed sync complete event for the 'microsoft' feed.
 
-1. Scan windows images! Either via the UI, or CLI analyze windows-based images
+1. Scan Microsoft Windows images! Either via the UI, or CLI analyze Microsoft Windows-based images
 
 1. Installed KBs available via the 'OS' content type: `anchore-cli image content <windows img> os`

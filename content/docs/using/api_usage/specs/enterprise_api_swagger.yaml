@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "This is the Anchore Enterprise API. It provides additional external API routes and functionality for enterprise users."
-  version: "0.2.0"
+  version: "0.2.1"
   title: "Anchore Enterprise API Server"
   contact:
     email: "dev@anchore.com"
@@ -96,6 +96,7 @@ paths:
         in: query
         type: boolean
         required: false
+        description: Filter results to include only vulnerabilities that are not marked as invalid by upstream OS vendor data. When set to true, it will filter out all vulnerabilities where `will_not_fix` is False. If false all vulnerabilities are returned regardless of `will_not_fix`
         default: true
       - name: base_digest
         in: query
@@ -794,6 +795,9 @@ definitions:
       package_path:
         type: string
         description: The location (if applicable) of the vulnerable package in the container filesystem
+      will_not_fix:
+        type: boolean
+        description: Whether a vendor will fix or not fix the vulnerability
       nvd_data:
         $ref: "#/definitions/NvdDataList"
       vendor_data:
