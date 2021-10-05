@@ -17,24 +17,53 @@ For most users the only configuration option that is typically updated is the fe
       ...
       feed_sync: 14400
 ```
-### Feed Settings - Grype
-By default, Anchore Enterprise syncs the Grype feed.
-The Grype feed will contain the records from all the other groups. It is not possible to include or exclude groups from the Grype feed.
-VulnDB and Microsoft feed data is not yet supported for the tech preview Grype vulnerability scanner. Those feeds will not be synced.
+### Feed Data Settings
 
+Feed data configuration is set in the config.yaml file used by policy engine service. The `services.policy_engine.vulnerabilities.sync.data` section
+of the configuration file controls the behavior of data to be synced. In addition, the data groups that can be synced depend on the `services.policy_engine.vulnerabilities.provider`, 
+and are explained in detail in the following sections.
 
-### Feed Settings - Legacy
-
-Feed sync configuration is set in the config.yaml file used by policy engine service. The `services.policy_engine.vulnerabilities.sync.data` section
-of the configuration file in the policy engine's container controls the behavior of feed syncs done by that particular container. Note that the location
-and format of this config data changed slightly in Anchore Engine 0.10 to reflect some internal refactoring.  Ensure this config is synchronized between
+Note: The location and format of the config data changed slightly in Anchore Engine 0.10 to reflect some internal refactoring.  Ensure this 
 containers if you are running more than one policy engine. This is usually handled for you by Helm Charts on Kubernetes, for example.
 
-Anchore Enterprise will default to downloading feed data from Anchore's feed service hosted at https://ancho.re/v1/service/feeds and running in AWS in the
-us-west-2 region.
+#### Grype  
 
-For legacy, by default, Anchore Enterprise will only sync the non-grype feeds enabled in the config section shown below. Setting additional feed types to true or false will
-enable or disable, respectively, synchronization of the specified feed.
+By default, Anchore Enterprise is configured with `grype` as the `services.policy_engine.vulnerabilities.provider` and `grypedb` feed group enabled. 
+The `grypedb` feed group syncs a single Grype database to the policy engine. 
+A Grype database contains data that spans multiple groups. Due to this encapsulation, it is not possible to enable or disable individual feed groups
+
+Anchore Enterprise will default to downloading the feed group from a publicly accessible URL maintained by Grype https://toolbox-data.anchore.io/grype/databases/listing.json. 
+The Grype database available from this endpoint does not include third-party/proprietary groups such as VulnDB and MSRC. 
+To get those groups, set `url` (or override the environment variable `ANCHORE_GRYPE_DB_URL`) to your local feed service.
+```
+services:
+  ...
+  policy_engine:
+    ...
+    vulnerabilities:
+      provider: grype
+      ...
+      sync:
+        ...
+        data:
+          grypedb:
+            enabled: true
+            url: ${ANCHORE_GRYPE_DB_URL}
+```
+
+#### Legacy
+
+If `services.policy_engine.vulnerabilities.provider` is set to `legacy`, Anchore Enterprise will try to sync the following groups 
+- `vulnerabilities` (enabled by default)
+- `nvdv2` (enabled by default)
+- `github` (enabled by default)
+- `vulndb `
+- `msrc`
+- `packages`
+
+Anchore Enterprise will default to downloading feed groups from Anchore's feed service hosted at https://ancho.re/v1/service/feeds and running in AWS in the
+us-west-2 region. This does not include third-party/proprietary groups such as VulnDB and MSRC. 
+To get those groups, set `url` (or override the environment variable `ANCHORE_FEEDS_URL`) to your local feed service.
 
 ```
 services:
@@ -44,11 +73,9 @@ services:
     vulnerabilities:
       ...
       sync:
+        provider: legacy
         ...
         data:
-          grypedb:
-            enabled: true
-            url: ${ANCHORE_GRYPE_DB_URL}
           vulnerabilities:
             enabled: true
             url: ${ANCHORE_FEEDS_URL}
@@ -58,6 +85,18 @@ services:
           github:
             enabled: true
             url: ${ANCHORE_FEEDS_URL}
+          vulndb:
+            enabled: ${ANCHORE_FEEDS_VULNDB_ENABLED}
+            url: ${ANCHORE_FEEDS_URL}
+          microsoft:
+            enabled: ${ANCHORE_FEEDS_MICROSOFT_ENABLED}
+            url: ${ANCHORE_FEEDS_URL}
+          # Warning: enabling the packages and nvd sync causes the service to require much
+          #   more memory to do process the significant data volume. We recommend at least 4GB available for the container
+          # packages feed is synced if it is enabled regardless of the provider
+          #packages:
+          #  enabled: true
+          #  url: ${ANCHORE_FEEDS_URL}
 ```
 
 #### Read Timeout
