@@ -116,6 +116,8 @@ services:
       #- ANCHORE_FEEDS_URL=http://feeds:8228/v1/feeds
       #- ANCHORE_FEEDS_CLIENT_URL=null
       #- ANCHORE_FEEDS_TOKEN_URL=null
+      # Uncomment the following environment variable if using BOTH the on-prem feed service AND grype vulnerability provider:
+      #- ANCHORE_GRYPE_DB_URL=http://feeds:8228/v1/databases/grypedb
       # Uncomment the next variable in addition to enabling the on-prem feed service just above, to enable syncing of the MSRC data feeds for windows scanning support.
       #- ANCHORE_FEEDS_MICROSOFT_ENABLED=true
       # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
@@ -332,6 +334,7 @@ services:
 #      - ANCHORE_DB_PASSWORD=mysecretpassword
 #      - ANCHORE_ENABLE_METRICS=false
 #      - ANCHORE_LOG_LEVEL=INFO
+#      - ANCHORE_ENTERPRISE_FEEDS_EXTERNAL_URL=http://feeds:8228/v1  
 #      # Uncomment the following to enable Microsoft msrc driver.
 #      - ANCHORE_ENTERPRISE_FEEDS_MSRC_DRIVER_ENABLED=true
 #      # Uncomment ANCHORE_ENTERPRISE_FEEDS_GITHUB_DRIVER_TOKEN for github driver.
