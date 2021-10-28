@@ -171,6 +171,25 @@ explicitly set to `False` for the feature to be disabled for that account.
       admin: True
       standard: True
     ```
+
+    * The (optional) `ldap_timeout` and `ldap_connect_timeout` keys respectively
+    specify the time (in milliseconds) the LDAP client should let operations stay
+    alive before timing out, and the time (in milliseconds) the LDAP client should
+    wait before timing out on TCP connections. Each value must be a whole number
+    greater than `0`.
+
+    When these values are unset (or set incorrectly) the app will fall back to
+    using a default value of `6000` milliseconds. The same default is used when the
+    keys are not enabled.
+    
+    These value can be overridden by using the `ANCHORE_LDAP_AUTH_TIMEOUT` and
+    `ANCHORE_LDAP_AUTH_CONNECT_TIMEOUT` environment variables.
+
+    ```
+    ldap_timeout: 6000
+    ldap_connect_timeout: 6000
+    ```
+
 ---
 **NOTE:** The latest default UI configuration file can always be extracted from the Enterprise UI container to review the latest options, environment overrides and descriptions of each option using the following process:
 
