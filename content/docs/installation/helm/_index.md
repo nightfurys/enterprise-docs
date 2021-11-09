@@ -1,6 +1,6 @@
 ---
 title: "Install with Helm on Kubernetes"
-linkTitle: "Kubernetes"
+linkTitle: "Kubernetes with Helm"
 weight: 3
 ---
 
