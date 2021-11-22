@@ -189,8 +189,26 @@ keys are not enabled.
     ldap_timeout: 6000
     ldap_connect_timeout: 6000
     ```
-    
 
+* The (optional) `custom_message` key allows you to provide a message that will
+  be displayed on the application login page below the **Username** and
+  **Password** fields. The key value must be an object that contains:
+  - A `title` key, whose string value provides a title for the message—which can
+    be up to `100` characters
+  - A `message` key, whose string value is the message itself—which can be up to
+    `500` characters
+  
+  ```
+  custom_message:
+    title:
+      "Title goes here..."
+    message:
+      "Message goes here..."
+  ```
+
+  **Note:** Both `title` and `message` values must be present and contain at 
+  least `1` character for the message box to be displayed. If either value
+  exceeds the character limit, the string will be truncated with an ellipsis.
 ---
 **NOTE:** The latest default UI configuration file can always be extracted from the Enterprise UI container to review the latest options, environment overrides and descriptions of each option using the following process:
 
