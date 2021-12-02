@@ -395,4 +395,3 @@ Github Issues:
 
 *   Anchore Engine [https://github.com/anchore/anchore-engine/issues](https://github.com/anchore/anchore-engine/issues)
 *   Anchore CLI: [https://github.com/anchore/anchore-cli/issues/](https://github.com/anchore/anchore-cli/issues/)
-*   CI tools: https://github.com/anchore/ci-tools/

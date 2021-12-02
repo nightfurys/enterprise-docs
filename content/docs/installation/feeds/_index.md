@@ -18,6 +18,7 @@ In this section, you'll learn about the requirements for installing Anchore Ente
 | Host | Port | Description |
 | :---- | :---- | :----------- |
 | linux.oracle.com | 443 | Oracle Linux Security Feed |
+| ftp.suse.com | 443 | SLES Security Feed |
 | github.com | 443 | Alpine Linux Security Database |
 | redhat.com | 443 | Red Hat Enterprise Linux Security Database |
 | access.redhat.com | 443 | Red Hat Security Data API |
