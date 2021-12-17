@@ -4,17 +4,17 @@ linkTitle: "Next-Gen Vulnerability Scanner"
 weight: 100
 ---
 
-As of version 3.2.0, the next-gen vulnerability scanner based on [Grype](https://github.com/anchore/grype) 
-is now fully supported and is the default scanner for new Anchore Enterprise deployments that use Anchore-provided deployment templates. 
+The next-gen vulnerability scanner based on [Grype](https://github.com/anchore/grype) 
+is fully supported and is the default scanner for new Anchore Enterprise deployments that use Anchore-provided deployment templates. 
 This scanner replaces the legacy vulnerability scanner in previous versions of Anchore Enterprise.
 
 ***Note:*** The legacy scanner is available for use but new features and improvements will only go into the Next-Gen scanner.
 
-***Note:*** Changing vulnerability scanner may require re-analysis of images if changing from Next-Gen back to legacy. See [Changing Providers](#Changing Vulnerability Providers) for more details. 
+***Note:*** Changing the vulnerability scanner may require re-analysis of images if changing from Next-Gen back to legacy. See [Changing Providers](#Changing Vulnerability Providers) for more details. 
 
 # Unified Vulnerability Feed and Feed Sync Behavior
 
-The next-gen "grype" vulnerability provider has different feed sync behavior for the vulnerabilities feeds. The legacy provider
+The next-gen "Grype" vulnerability provider has different feed sync behavior for the vulnerabilities feeds. The legacy provider
 has a set of individual feeds from different vulnerability sources such as "vulnerabilities", "nvdv2", "microsoft", "github", and "vulndb".
 The new scanner has a single "vulnerabilities" feed with "nvd", "microsoft", "github", and "vulndb" as specific groups within the vulnerabilities
 feed. This more accurately represents how vulnerabilities are managed in the new provider where a single image may have packages matched
