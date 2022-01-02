@@ -4,17 +4,18 @@ linkTitle: "Enabling Windows in Quickstart"
 weight: 1
 ---
 
-To enable Microsoft Windows support in the quickstart install docker-compose.yaml file you must:
+To enable Microsoft Windows support in the quickstart install docker-compose.yaml file you must do the following:
 
 1. Go to the directory where you have the quickstart docker-compose.yaml downloaded. Or, see [Quickstart]({{< ref "/docs/quickstart" >}}) for download and setup instructions.
 
-1. If your system is already running, shut it down: `docker-compose down` (NOTE: do **NOT** use the `-v` option or that will delete your database and reset the system entirely).
+1. If your system is already running, shut it down: `docker-compose down`. 
+(**Warning**: Do **NOT** use the `-v` option as it will delete your database and reset the system entirely).
 
-1. Enable the feeds service to run. Uncomment the feeds service and enterprise-feeds-db services in docker-compose.yaml
+1. Enable the feeds service to run. Uncomment the feeds service and enterprise-feeds-db services in docker-compose.yaml.
 
    The following also includes the GitHub advisories feed for NuGet/.NET support and for parity with the hosted feed service.
 
-   Note that you will need to obtain and provide access tokens for MSRC and GitHub vulnerability feed configuration.  See the comments inline for instructions on how to obtain these tokens.
+   Note that you will need to obtain and provide access tokens for MSRC and GitHub vulnerability feed configuration. See the comments inline for instructions on how to obtain these tokens.
 
 
     ```
@@ -64,9 +65,9 @@ To enable Microsoft Windows support in the quickstart install docker-compose.yam
 
     ```
 
-***Note:*** Microsoft Windows image analysis is available for the V2 vulnerability scanner based on Grype.
+**Note:** Microsoft Windows image analysis is available for the V2 vulnerability scanner based on Grype.
 
-1. Configure the policy engine to use the deployed feed service instead of the hosted feed service, and enable the Microsoft feed by uncommenting the ANCHORE_FEEDS_MICROSOFT_ENABLED variable
+1. Configure the policy engine to use the deployed feed service instead of the hosted feed service. Enable the Microsoft feed by uncommenting the ANCHORE_FEEDS_MICROSOFT_ENABLED variable.
 
     Ensure the following environment variables are set in the docker-compose.yaml file:
 
@@ -86,16 +87,16 @@ To enable Microsoft Windows support in the quickstart install docker-compose.yam
       ...
     ```
 
-1. Start/Restart the deployment: `docker-compose up -d`
+1. Start/Restart the deployment: `docker-compose up -d`.
 
-1. Wait for vulnerability data to sync.  Now that your installation includes a local feed service, you must first wait for the local feed service to populate, and then for your Anchore Enterprise policy engine to synchronize its feeds with the new local service.  This can take several hours for the initial sync, depending on network and local resource speeds.  Eventually, executing the following command:
+1. Wait for vulnerability data to sync.  Now that your installation includes a local feed service, you must first wait for the local feed service to populate, and then for your Anchore Enterprise policy engine to synchronize its feeds with the new local service.  This can take several hours for the initial sync, depending on network and local resource speeds.  When the feed synchronization is complete, execute the following command to show the 'microsoft' feed, with 'msrc' group data entries:
 
 ```
 # docker-compose exec api anchore-cli system feeds list
 ```
 
-will show 'microsoft' feed, with 'msrc' group data entries. In addition, you can verify with `anchore-cli event list` to show a feed sync complete event for the 'microsoft' feed.
+In addition, you can use `anchore-cli event list` to show a feed sync complete event for the 'microsoft' feed.
 
-1. Scan Microsoft Windows images! Either via the UI, or CLI analyze Microsoft Windows-based images
+Now you can scan Microsoft Windows-based images using the Anchore Enterprise UI, or the command line interface (CLI).
 
-1. Installed KBs available via the 'OS' content type: `anchore-cli image content <windows img> os`
+Installed KBs are also available via the 'OS' content type: `anchore-cli image content <windows img> os`.
