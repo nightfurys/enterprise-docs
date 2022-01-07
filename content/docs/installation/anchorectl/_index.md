@@ -52,7 +52,7 @@ curl -o anchorectl.zip https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0
 
 ### Configuration
 AnchoreCTL can be configured via a config file at the following locations, with the following precedence:
-1. Environment Vars (i.e. ANCHORECTL_ANCHORE_USER)
+1. Environment Vars (i.e. ANCHORECTL_ANCHORE_USER, ANCHORECTL_ANCHORE_PASSWORD, ANCHORECTL_ANCHORE_URL)
 2. Config Path override (note: if this file is not found, config SHOULD fail)
 3. .anchorectl.yaml or anchorectl.yaml
 4. .anchorectl/config.yaml

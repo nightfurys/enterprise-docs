@@ -12,7 +12,7 @@ This document reviews the overall architecture of a full Anchore Enterprise depl
 
 #### Enterprise UI
 
-The Enterprise UI is a proprietary UI for interacting with both the open-source Anchore Engine as well as enterprise extensions like role-based access-control. The UI depends on Redis to provide session state storage in memory and to act as a cache. Requires a valid Anchore Enterprise license to start and run.
+The Anchore Enterprise UI is a proprietary UI for interacting with both the open-source Anchore Engine as well as Enterprise extensions like role-based access-control. The UI depends on Redis to provide session state storage in memory and to act as a cache. The UI requires a valid Anchore Enterprise license to start and run.
 
 ##### Consumes
 
@@ -29,7 +29,7 @@ The Enterprise UI is a proprietary UI for interacting with both the open-source 
 
 #### Anchore Engine CLI
 
-The open-source Anchore CLI is the primary command line interface to Enterprise and interfaces with the API. See: Anchore CLI on Github
+The open-source Anchore CLI is the primary command line interface to Enterprise and interfaces with the API. See: Anchore CLI on Github.
 
 ##### Consumes
 
@@ -39,7 +39,7 @@ The open-source Anchore CLI is the primary command line interface to Enterprise 
 
 #### External API
 
-The external API is the primary API for the entire system. This service runs the API used to analyze images, get policy evaluations etc. In Enterprise installations, it is enhanced with an authorization plugin to provide role-based access-control (rbac) of resources and actions in addition to the standard account and user management features of the open-source Engine.
+The external API is the primary API for the entire system. This service runs the API used to analyze images, get policy evaluations and so on. In Anchore Enterprise installations, The API is enhanced with an authorization plugin to provide role-based access-control (RBAC) of resources and actions, in addition to the standard account and user management features of the open-source Engine.
 
 ##### Consumes
 
@@ -54,7 +54,7 @@ The external API is the primary API for the entire system. This service runs the
 
 #### Enterprise RBAC Manager
 
-The RBAC manager is the user-facing API for configuring the roles and assigning users to roles in the system. The API served by this component is also rbac-enabled. Requires a valid Anchore Enterprise license to start and run.
+The RBAC manager is the user-facing API for configuring the roles and assigning users to roles in the system. The API served by this component is also RBAC-enabled. This API requires a valid Anchore Enterprise license to start and run.
 
 ##### Consumes
 
@@ -78,7 +78,7 @@ This is not a user-facing component, but is consumed by both the Engine API and 
 
 #### Catalog
 
-The catalog is the primary state manager of the system and owns both the state machines for images as well as the document archive interface used to store large, unstructured documents like JSON outputs from analysis. 
+The catalog is the primary state manager of the system and owns both the state machines for images, as well as the document archive interface used to store large, unstructured documents like JSON outputs from analysis. 
 
 ##### Consumes
 
@@ -104,7 +104,7 @@ The policy engine is responsible for loading the result of an image analysis and
 
 #### SimpleQueue
 
-The simplequeue is a postgresql-backed queue service that the other components use for task execution, notifications, and other asynchronous operations.
+The SimpleQueue is a postgresql-backed queue service that the other components use for task execution, notifications, and other asynchronous operations.
 
 ##### Requires
 
@@ -112,7 +112,7 @@ The simplequeue is a postgresql-backed queue service that the other components u
 
 #### Enterprise Feed Service
 
-The feed service component provides external vulnerability and package metadata to the policy engine for use in performing vulnerability scans and policy evaluations. It runs a set of drivers which each reach out to specific data sources to ingress the data from that source into a standard format that Anchore can consume. 
+The Enterprise Feed service component provides external vulnerability and package metadata to the policy engine for use in performing vulnerability scans and policy evaluations. It runs a set of drivers that reach out to specific data sources to ingress the data from that source into a standard format that Anchore can consume. 
 
 Requires a valid Anchore Enterprise license to start and run.
 
@@ -161,6 +161,4 @@ As an example of a production deployment topology, the Anchore Engine helm chart
 
 ### Next Steps
 
-Now, let's get familiar with the concepts of Anchore Enterprise.
-
-To begin, go to [Concepts]({{< ref "/docs/overview/concepts" >}})
+Now, let's get familiar with the [Concepts]({{< ref "/docs/overview/concepts" >}}) of Anchore Enterprise.
