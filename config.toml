@@ -7,7 +7,7 @@ enableRobotsTXT = true
 theme = ["docsy"]
 
 # Will give values to .Lastmod etc.
-enableGitInfo = true
+enableGitInfo = false
 
 # Language settings
 contentDir = "content"
@@ -58,7 +58,7 @@ id = "UA-112192425-2"
 [params]
 copyright = "Anchore Inc"
 privacy_policy = "https://anchore.com/privacy"
-github_repo = "https://github.com/anchore/enterprise-docs"
+#github_repo = "https://github.com/anchore/enterprise-docs"
 
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 gcs_engine_id = "009716543010626803843:6ao6qa9rulw"
@@ -75,7 +75,7 @@ breadcrumb_disable = false
 # If you want this feature, but occasionally need to remove the "Feedback" section from a single page,
 # add "hide_feedback: true" to the page's front matter.
 [params.ui.feedback]
-enable = true
+enable = false
 # The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
 yes = 'Glad to hear it! Please <a href="https://github.com/anchore/enterprise-docs/issues/new">tell us how we can improve</a>.'
 no = 'Sorry to hear that. Please <a href="https://github.com/anchore/enterprise-docs/issues/new">tell us how we can improve</a>.'
@@ -101,18 +101,6 @@ no = 'Sorry to hear that. Please <a href="https://github.com/anchore/enterprise-
     desc = "Check out our Facebook page!"
 
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
-[[params.links.developer]]
-  name = "Slack"
-  url = "https://anchore.com/slack"
-  icon = "fab fa-slack"
-    desc = "Chat with other users and project developers!"
-
-[[params.links.developer]]
-	name = "GitHub"
-	url = "https://github.com/anchore/anchore-engine"
-	icon = "fab fa-github"
-    desc = "Anchore Engine Source"
-
 [[params.links.developer]]
   name = "Anchore, Inc."
   url = "https://anchore.com"
