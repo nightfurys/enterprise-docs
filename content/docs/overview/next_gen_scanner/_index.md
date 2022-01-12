@@ -10,7 +10,7 @@ This scanner replaces the legacy vulnerability scanner in previous versions of A
 
 ***Note:*** The legacy scanner is available for use but new features and improvements will only go into the Next-Gen scanner.
 
-***Note:*** Changing the vulnerability scanner may require re-analysis of images if changing from Next-Gen back to legacy. See [Changing Providers](#Changing Vulnerability Providers) for more details. 
+***Note:*** Changing the vulnerability scanner may require re-analysis of images if changing from Next-Gen back to legacy. See [Changing Providers](#Changing-Vulnerability-Providers) for more details. 
 
 # Unified Vulnerability Feed and Feed Sync Behavior
 
