@@ -4,7 +4,8 @@ This is the repository for the Anchore Enterprise Documentation site.
 
 ## Filing Bugs/Issues:
 
-See [Issues](https://github.com/anchore/enterprise-docs/issues)
+Bugs should be filed in Anchore's internal JIRA in the "Anchore Enterprise" project with "compenent" field set to "Documentation".
+JIRA: https://anchore.atlassian.net/jira/software/c/projects/ENTERPRISE/boards/22
 
 ## Contributing
 
@@ -12,8 +13,6 @@ See [Contributing](CONTRIBUTING.rst) for the DCO and sign-off information. In sh
 commits with 'Signed-off-by X' with `git commit -s`.
 
 ### Making Changes/Contribution Workflow
-
-1. Fork the repository
 
 1. Install [hugo-extended](https://github.com/gohugoio/hugo/releases/), this is necessary because the docsy theme uses some scss functionality only in the extended version.
 
@@ -29,9 +28,9 @@ commits with 'Signed-off-by X' with `git commit -s`.
 1. Run hugo for local debugging/dev:
 `cd enterprise-docs ; hugo server`
 
-1. Make changes
+1. Create a branch and make change, but do **NOT** use a semver (a.b.c format) branch name. Please use the JIRA issue number you are resolving (e.g. ENTERPRISE-123) or a short text (fix_readme_spacing).
 
-1. Commit and push
+1. Commit and push your branch
 
 1. Open PR to github.com/anchore/enterprise-docs for merge to master
 
