@@ -113,6 +113,8 @@ services:
       - ANCHORE_LOG_LEVEL=INFO
       # To use on-prem feed service with grype, uncomment ANCHORE_GRYPE_DB_URL. In addition, uncomment the enterprise-feeds-db and feeds services at the end of this file
       #- ANCHORE_GRYPE_DB_URL=http://feeds:8228/v1/databases/grypedb
+      # To use on-prem feed service, uncomment the following ANCHORE_FEEDS_* environment variables. In addition, uncomment the enterprise-feeds-db and feeds services at the end of this file
+      #- ANCHORE_FEEDS_URL=http://feeds:8228/v1/feeds
       #- ANCHORE_FEEDS_CLIENT_URL=null
       #- ANCHORE_FEEDS_TOKEN_URL=null
       # Uncomment the next variable in addition to enabling the on-prem feed service just above, to enable syncing of the MSRC data feeds for windows scanning support.
