@@ -16,7 +16,7 @@ volumes:
 services:
   # The primary API endpoint service
   api:
-    image: docker.io/anchore/enterprise:v3.3.0
+    image: docker.io/anchore/enterprise:v4.0.0
     depends_on:
       - anchore-db
       - catalog
@@ -43,7 +43,7 @@ services:
     command: ["anchore-enterprise-manager", "service", "start",  "apiext"]
   # Catalog is the primary persistence and state manager of the system
   catalog:
-    image: docker.io/anchore/enterprise:v3.3.0
+    image: docker.io/anchore/enterprise:v4.0.0
     depends_on:
       - anchore-db
     volumes:
@@ -68,7 +68,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "catalog"]
   queue:
-    image: docker.io/anchore/enterprise:v3.3.0
+    image: docker.io/anchore/enterprise:v4.0.0
     depends_on:
       - anchore-db
       - catalog
@@ -92,7 +92,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "simplequeue"]
   policy-engine:
-    image: docker.io/anchore/enterprise:v3.3.0
+    image: docker.io/anchore/enterprise:v4.0.0
     depends_on:
       - anchore-db
       - catalog
@@ -124,7 +124,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "policy_engine"]
   analyzer:
-    image: docker.io/anchore/enterprise:v3.3.0
+    image: docker.io/anchore/enterprise:v4.0.0
     depends_on:
       - anchore-db
       - catalog
@@ -163,7 +163,7 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
   rbac-authorizer:
-    image: docker.io/anchore/enterprise:v3.3.0
+    image: docker.io/anchore/enterprise:v4.0.0
     volumes:
       - ./license.yaml:/license.yaml:ro
       #- ./config-enterprise.yaml:/config/config.yaml:z
@@ -187,7 +187,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "rbac_authorizer"]
   rbac-manager:
-    image: docker.io/anchore/enterprise:v3.3.0
+    image: docker.io/anchore/enterprise:v4.0.0
     volumes:
       - ./license.yaml:/license.yaml:ro
       #- ./config-enterprise.yaml:/config/config.yaml:z
@@ -213,7 +213,7 @@ services:
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "rbac_manager"]
   reports:
-    image: docker.io/anchore/enterprise:v3.3.0
+    image: docker.io/anchore/enterprise:v4.0.0
     volumes:
       - ./license.yaml:/license.yaml:ro
       #- ./config-enterprise.yaml:/config/config.yaml:z      
@@ -238,8 +238,32 @@ services:
       #- ANCHORE_OAUTH_ENABLED=true
       #- ANCHORE_AUTH_SECRET=supersharedsecret
     command: ["anchore-enterprise-manager", "service", "start",  "reports"]
+  reports_worker:
+    image: docker.io/anchore/enterprise:v4.0.0
+    volumes:
+      - ./license.yaml:/license.yaml:ro
+      #- ./config-enterprise.yaml:/config/config.yaml:z      
+    depends_on:
+      - anchore-db
+      - catalog
+    expose:
+      - 8228
+    logging:
+       driver: "json-file"
+       options:
+         max-size: 100m
+     environment:
+       - ANCHORE_ENDPOINT_HOSTNAME=reports_worker
+       - ANCHORE_DB_HOST=anchore-db
+       - ANCHORE_DB_PASSWORD=mysecretpassword
+       - ANCHORE_ENABLE_METRICS=false
+       - ANCHORE_LOG_LEVEL=INFO
+       # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
+       #- ANCHORE_OAUTH_ENABLED=true
+       #- ANCHORE_AUTH_SECRET=supersharedsecret
+     command: ["anchore-enterprise-manager", "service", "start",  "reports_worker"]
   notifications:
-    image: docker.io/anchore/enterprise:v3.3.0
+    image: docker.io/anchore/enterprise:v4.0.0
     volumes:
       - ./license.yaml:/license.yaml:ro
       #- ./config-enterprise.yaml:/config/config.yaml:z      
@@ -276,7 +300,7 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "redis-cli PING"]
   ui:
-    image: docker.io/anchore/enterprise-ui:v3.3.0
+    image: docker.io/anchore/enterprise-ui:v4.0.0
     volumes:
       - ./license.yaml:/license.yaml:ro
       #- ./config-ui.yaml:/config/config-ui.yaml:z
@@ -314,7 +338,7 @@ services:
 #    healthcheck:
 #      test: ["CMD-SHELL", "pg_isready -U postgres"]
 #  feeds:
-#    image: docker.io/anchore/enterprise:v3.3.0
+#    image: docker.io/anchore/enterprise:v4.0.0
 #    volumes:
 #      - feeds-workspace-volume:/workspace
 #      - ./license.yaml:/license.yaml:ro
