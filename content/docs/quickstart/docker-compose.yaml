@@ -3,7 +3,7 @@
 version: '2.1'
 volumes:
   # Since this is for a quickstart, each minor version has its own db, to use a previous db and upgrade, change this to the db volume name you want to upgrade. e.g. "anchore-enterprise-3.2-db" if upgrading from a 3.2 quickstart deployment.
-  anchore-enterprise-3.3-db:
+  anchore-enterprise-4.0-db:
     # Set this to 'true' to use an external volume. In which case, it must be created manually with "docker volume create anchore-db-volume"
     external: false
   feeds-workspace-volume:
