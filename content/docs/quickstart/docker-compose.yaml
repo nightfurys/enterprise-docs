@@ -149,9 +149,9 @@ services:
       #- ./config-engine.yaml:/config/config.yaml:z
     command: ["anchore-enterprise-manager", "service", "start",  "analyzer"]
   anchore-db:
-    image: "postgres:9"
+    image: "postgres:12"
     volumes:
-      - anchore-enterprise-3.3-db:/var/lib/postgresql/data
+      - anchore-enterprise-4.0-db:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=mysecretpassword
     expose:
@@ -252,16 +252,16 @@ services:
        driver: "json-file"
        options:
          max-size: 100m
-     environment:
-       - ANCHORE_ENDPOINT_HOSTNAME=reports_worker
-       - ANCHORE_DB_HOST=anchore-db
-       - ANCHORE_DB_PASSWORD=mysecretpassword
-       - ANCHORE_ENABLE_METRICS=false
-       - ANCHORE_LOG_LEVEL=INFO
-       # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
-       #- ANCHORE_OAUTH_ENABLED=true
-       #- ANCHORE_AUTH_SECRET=supersharedsecret
-     command: ["anchore-enterprise-manager", "service", "start",  "reports_worker"]
+    environment:
+      - ANCHORE_ENDPOINT_HOSTNAME=reports_worker
+      - ANCHORE_DB_HOST=anchore-db
+      - ANCHORE_DB_PASSWORD=mysecretpassword
+      - ANCHORE_ENABLE_METRICS=false
+      - ANCHORE_LOG_LEVEL=INFO
+      # Uncomment both ANCHORE_OAUTH_ENABLED and ANCHORE_AUTH_SECRET to enable SSO feature of anchore-enterprise
+      #- ANCHORE_OAUTH_ENABLED=true
+      #- ANCHORE_AUTH_SECRET=supersharedsecret
+    command: ["anchore-enterprise-manager", "service", "start",  "reports_worker"]
   notifications:
     image: docker.io/anchore/enterprise:v4.0.0
     volumes:
