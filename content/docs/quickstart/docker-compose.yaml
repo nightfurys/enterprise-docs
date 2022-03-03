@@ -324,7 +324,7 @@ services:
 
   # Uncomment this section to add an on-prem feed service to this deployment. This will incur first-time feed sync delay, but is included for completeness / review of enterprise service deployment options
 #  enterprise-feeds-db:
-#    image: "postgres:9"
+#    image: "postgres:12"
 #    volumes:
 #      - enterprise-feeds-db-volume:/var/lib/postgresql/data
 #    environment:
