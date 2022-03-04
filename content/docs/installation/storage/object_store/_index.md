@@ -8,7 +8,7 @@ Anchore Enterprise uses a PostgreSQL database to store structured data for image
 about images, but other types of data in the system are less structured and tend to be larger pieces of data. Because of
 that, there are benefits to supporting key-value access patterns for things like image manifests, analysis reports, and 
 policy evaluations. For such data, Anchore has an internal object storage interface that, while defaulted to use the
-same postgres db for storage, can be configured to use external object storage providers to support simpler capacity
+same Postgres database for storage, can be configured to use external object storage providers to support simpler capacity
 management and lower costs. The options are:
 
 - PostgreSQL database (default)
@@ -18,14 +18,6 @@ management and lower costs. The options are:
 
 The configuration for the object store is set in the catalog's service configuration in the config.yaml.
 
-### Changed in 2.0.0 of Anchore Enterprise
-
-In releases before 2.0.0 of Anchore Enterprise, the configuration key was `archive`. As of 2.0.0 that has been changed to 
-`object_store` but will still support `archive` for backwards compatibility, though that key is now deprecated. The
-reason for the change is the new in 2.0.0 analysis archive feature, which uses the configuration key `analysis_archive`.
-
-The change helps differentiate the analysis archive, which is an object store with specific lifecycle semantics, from 
-the more generic object store configuration.
 
 
  

@@ -10,9 +10,9 @@ The preferred method for deploying Anchore Enterprise on Kubernetes is with [Hel
 
 The [README](https://github.com/anchore/anchore-charts/blob/master/stable/anchore-engine/README.md) in the chart repository contains more details on how to configure the Anchore Engine Helm chart and should always be consulted before proceeding with installation or upgrades.
 
-This chart deploys the Anchore Engine docker container image analysis system. Anchore Engine requires a PostgreSQL database (>=9.6) which may be handled by the chart or supplied externally, and executes in a service based architecture utilizing the following Anchore Engine services: External API, Simplequeue, Catalog, Policy Engine, and Analyzer.
+Helm charts will update to install PostgresSQL 12 by default for new installs. You should use a PostgreSQL 10 or higher database. This may be handled by the chart or supplied externally, and executes in a service-based architecture utilizing the following Anchore Engine services: External API, Simplequeue, Catalog, Policy Engine, and Analyzer.
 
-This chart can also be used to install the following Anchore Enterprise services: GUI, RBAC, On-prem Feeds. Enterprise services require a valid Anchore Enterprise License as well as credentials with access to the private dockerhub repository hosting the images. These are not enabled by default.
+This chart can also be used to install the following Anchore Enterprise services: GUI, RBAC, On-prem Feeds. Enterprise services require a valid Anchore Enterprise license, as well as credentials with access to the private dockerhub repository hosting the images. These are not enabled by default.
 
 Each of these services can be scaled and configured independently.
 
@@ -35,15 +35,15 @@ To use this Helm chart with the enterprise services enabled, perform these steps
 
 *Note: It's best to quote user supplied strings in case there are any special characters. For example, the username, password, and email supplied in Step 2 below might contain symbols, dots, underscores, etc.*
 
-1. Create a kubernetes secret containing your license file.
+1. Create a Kubernetes secret containing your license file.
 
     `kubectl create secret generic anchore-enterprise-license --from-file='license.yaml=<PATH/TO/LICENSE.YAML>'`
 
-1. Create a kubernetes secret containing dockerhub credentials with access to the private anchore enterprise repositories.
+1. Create a Kubernetes secret containing Dockerhub credentials with access to the private Anchore Enterprise repositories.
 
     `kubectl create secret docker-registry anchore-enterprise-pullcreds --docker-server='docker.io' --docker-username='<DOCKERHUB_USER>' --docker-password='<DOCKERHUB_PASSWORD>' --docker-email='<EMAIL_ADDRESS>'`
 
-1. Install the helm chart using a custom anchore_values.yaml file (see examples below). Note that <release_name> is a name that you choose.
+1. Install the Helm chart using a custom anchore_values.yaml file (see examples below). Note that <release_name> is a name that you choose.
 
     #### Helm v3 installation
     `helm repo add anchore https://charts.anchore.io`
@@ -76,8 +76,8 @@ To use this Helm chart with the enterprise services enabled, perform these steps
     password: <PASSWORD>
   ```
 
-### Upgrading from a previous Helm deployment
-A Helm post-upgrade hook job has been added starting with Chart version 1.6.0 - this job will shut down all previously running Anchore services and perform the Anchore DB upgrade process using a kubernetes job. 
+### Upgrading from a Previous Helm deployment
+A Helm post-upgrade hook job has been added starting with Chart version 1.6.0 - this job will shut down all previously running Anchore services and perform the Anchore DB upgrade process using a Kubernetes job. 
 The upgrade will only be considered successful when this job completes successfully. Performing an update after v1.6.0 will cause the Helm client to block until the upgrade job completes and the new Anchore service pods are started.
 
 ```
@@ -87,7 +87,7 @@ helm upgrade <release_name> anchore/anchore-engine -f anchore_values.yaml
 
 ### Next Steps
 
-Now that you have Anchore Enterprise running, you can begin to learning more about Anchore Enterprise Architecture, Anchore Concepts and Anchore Usage.
+Now that you have Anchore Enterprise running, you can begin to learning more about Anchore Enterprise architecture, Anchore concepts, and Anchore usage.
 
 - To learn more about Anchore Enterprise, go to [Overview]({{< ref "/docs/overview" >}})
 - To learn more about Anchore Concepts, go to [Concepts]({{< ref "/docs/overview/concepts" >}})
