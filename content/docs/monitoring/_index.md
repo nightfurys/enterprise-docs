@@ -1,7 +1,7 @@
 ---
 title: "Monitoring Anchore Enterprise"
 linkTitle: "Monitoring"
-weight: 6
+weight: 7
 ---
 
 Anchore Enterprise exposes prometheus metrics in the API of each service if the config.yaml used by that service has the metrics.enabled key set to true.
