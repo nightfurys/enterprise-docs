@@ -93,6 +93,18 @@ scrape_configs:
       username: admin
       password: foobar
 
+  - job_name: reports_worker
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - reports_worker:8228
+    basic_auth:
+      username: admin
+      password: foobar
+
   - job_name: notifications
     scrape_interval: 15s
     scrape_timeout: 10s
