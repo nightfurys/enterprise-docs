@@ -12,7 +12,7 @@ JIRA: https://anchore.atlassian.net/jira/software/c/projects/ENTERPRISE/boards/2
 See [Contributing](CONTRIBUTING.rst) for the DCO and sign-off information. In short, sign all
 commits with 'Signed-off-by X' with `git commit -s`.
 
-### Making Changes/Contribution Workflow
+### Installing local tools for development
 
 1. Install [hugo-extended](https://github.com/gohugoio/hugo/releases/), this is necessary because the docsy theme uses some scss functionality only in the extended version.
 
@@ -26,7 +26,9 @@ commits with 'Signed-off-by X' with `git commit -s`.
   `git submodule update --init --recursive`
 
 1. Run hugo for local debugging/dev:
-`cd enterprise-docs ; hugo server`
+`cd enterprise-docs ; ./run_local_server.sh`
+
+### Making changes and submitting updatess
 
 1. Create a branch and make change, but do **NOT** use a semver (a.b.c format) branch name. Please use the JIRA issue number you are resolving (e.g. ENTERPRISE-123) or a short text (fix_readme_spacing).
 
