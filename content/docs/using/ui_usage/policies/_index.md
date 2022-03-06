@@ -35,16 +35,16 @@ weight: 1
 
 ## What is a policy?
 
-A _policy_ is composed of a set of rules that are used to perform an evaluation on a container image. These rules include (but are not limited to) checks on security, known vulnerabilities, configuration file contents, the presence of credentials in an image, manifest changes, exposed ports, or any user defined checks.
+A _policy_ is composed of a set of rules that are used to perform an evaluation on a source repository or container image. These rules include (but are not limited to) checks on security, known vulnerabilities, configuration file contents, the presence of credentials in an image, manifest changes, exposed ports, or any user defined checks.
 
-Policies can be deployed site wide, or customized to run against to specific images or categories of application. For additional  information, refer to the [Policy]({{< ref "/docs/overview/concepts/policy" >}}) concepts section.
+Policies can be deployed site wide, or customized to run against specific sources, images, or categories of application. For additional information, refer to the [Policy]({{< ref "/docs/overview/concepts/policy" >}}) concepts section.
 
-Once a policy has been applied to an image, it can return one of two results:
+Once a policy has been applied to a a source repository or image container, it can return one of two results:
 
-<img src="policy/PolicyPassBtn.png" class="img_tiny" /> indicating that image *complies* with your policy
+<img src="policy/PolicyPassBtn.png" class="img_tiny" /> indicating that source or image *complies* with your policy
 
 
-<img src="policy/PolicyFailBtn.png" class="img_tiny" /> indicating that the image is *non-compliant* with your policy.
+<img src="policy/PolicyFailBtn.png" class="img_tiny" /> indicating that the source or image is *non-compliant* with your policy.
 
 
 ### Rules
@@ -64,7 +64,7 @@ Policy rule checks are made up of *gates* and *triggers*. A gate is a set of pol
 
 <img src="policy/PolicyRulesTab.png" class="img_tiny" />
 
-The area under the **Policies** subtab (shown above) in the policy editor contains a table that lists all of the policies defined within a selected policy bundle. The numeric indicator <img src="policy/PolicyRulesTabCount.png" class="img_mini" /> represents the overall number of polices currently defined in the bundle.
+The area under the **Policies** sub-tab in the policy editor contains a table that lists all of the policies defined within a selected policy bundle. The numeric indicator <img src="policy/PolicyRulesTabCount.png" class="img_mini" /> represents the overall number of polices currently defined in the bundle.
 
 ![alt text](policy/PolicyRulesTable.png)
 
