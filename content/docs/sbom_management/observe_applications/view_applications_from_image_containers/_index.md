@@ -19,7 +19,7 @@ You can download a report in JSON format for everything in an application. Or, y
 
 ![Container Images SBOM Report](sbom-reports-for-container-images.png)
 
-When you select an artifact link, you will see the analysis options for that artifact. You can then view information about the artifact, such as the policies set up, the vulnerabilities, SBOM contents, image metadata information, build summary, and action workbench. See [How to work with Applications generated from Image Containers](https://docs.anchore.com/current/docs/sbom_management/work_applications_generated_from_image_containers) for more information.
+When you select an artifact link, you will see the analysis options for that artifact. You can then view information about the artifact, such as the policies set up, the vulnerabilities, SBOM contents, image metadata information, build summary, and action workbench. 
 
 ![Container Images Analysis](container-image-analysis.png)
 

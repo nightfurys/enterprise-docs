@@ -6,7 +6,7 @@ weight: 9
 
 ## Add an Artifact Association
 
-The following commands require source or image artifacts to already be added to the Anchore Enterprise instance before they can be associated with the application version. See [SBOM Management]({{< ref "/docs/sbom_management" >}}) for more information.
+The following commands require source or image artifacts to already be added to the Anchore Enterprise instance before they can be associated with the application version. 
 
 **Note**: Keep track of the uuid of the sources, and the digest of the images that you will add to the application version. These are the values used to associate each artifact with the application version.
 

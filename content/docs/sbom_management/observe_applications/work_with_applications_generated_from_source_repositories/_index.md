@@ -6,8 +6,6 @@ weight: 4
 
 To work with source repository data in Anchore Enterprise, you must first use AnchoreCTL or the Anchore API to load the source repository into Enterprise. 
 
-See [Applications](https://docs.anchore.com/current/docs/sbom_management/application_groups) for more information on how to import source repository data into Anchore Enterprise. 
-
 Once the data is made available to Anchore Enterprise, you can then view and generate reports specific to an application version. An example workflow might be as follows.
 
 1. Start Anchore Enterprise. You will default to the dashboard view. The Dashboard is your configurable landing page where insights into the collective status of your source repository. The summary information is displayed through various widgets. Utilizing the Enterprise Reporting Service, the widgets are hydrated with metrics which are generated and updated on a cycle, the duration of which is determined by application configuration. See [Dashboard](https://docs.anchore.com/current/docs/using/ui_usage/dashboard/) for more information about what you can view.

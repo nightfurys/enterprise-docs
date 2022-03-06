@@ -23,7 +23,7 @@ Application versions, rather than applications, are directly associated with art
 
 An artifact is a generic term that encompasses any SDLC artifact that can be associated with an application version. Currently, that includes sources and images. The application API has endpoints (and AnchoreCTL has subcommands) to manage the associations between application versions and artifacts.
 
-One important distinction is that these endpoints and commands are operating on the association between artifacts and application versions, not on the artifacts themselves. A source or image must already be added to Anchore Enterprise before it can be associated with an application. Similarly, removing the association with an application version does not remove the artifact from Anchore Enterprise. It can later be reassociated with the application version, or another application version. See [SBOM Management]({{< ref "/docs/sbom_management" >}}) for more information.
+One important distinction is that these endpoints and commands are operating on the association between artifacts and application versions, not on the artifacts themselves. A source or image must already be added to Anchore Enterprise before it can be associated with an application. Similarly, removing the association with an application version does not remove the artifact from Anchore Enterprise. It can later be reassociated with the application version, or another application version. 
 
 
 ## Application Version SBOMs
