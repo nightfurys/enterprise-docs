@@ -111,6 +111,7 @@ services:
       - ANCHORE_DB_PASSWORD=mysecretpassword
       - ANCHORE_ENABLE_METRICS=false
       - ANCHORE_LOG_LEVEL=INFO
+      - ANCHORE_VULNERABILITIES_PROVIDER=grype
       # To use on-prem feed service with grype, uncomment ANCHORE_GRYPE_DB_URL. In addition, uncomment the enterprise-feeds-db and feeds services at the end of this file
       #- ANCHORE_GRYPE_DB_URL=http://feeds:8228/v1/databases/grypedb
       # To use on-prem feed service, uncomment the following ANCHORE_FEEDS_* environment variables. In addition, uncomment the enterprise-feeds-db and feeds services at the end of this file
