@@ -1,7 +1,7 @@
 ---
-title: "SBOM Generation and Management from a Source Repository using AnchoreCTL
+title: "SBOM Generation and Management from Source Repository - AnchoreCTL
 "
-linkTitle: "SBOM Generation and Management from a Source Repository using AnchoreCTL
+linkTitle: "SBOM Management from Source Repository - AnchoreCTL
 "
 weight: 3
 ---

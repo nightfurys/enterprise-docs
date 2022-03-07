@@ -1,7 +1,7 @@
 ---
-title: "Application Version management via AnchoreCTL"
-linkTitle: "Application Version management via AnchoreCTL"
-weight: 8
+title: "Application Version management - AnchoreCTL"
+linkTitle: "Application Version management - AnchoreCTL"
+weight: 1
 ---
 
 Use AnchoreCTL to manage your application versions.  

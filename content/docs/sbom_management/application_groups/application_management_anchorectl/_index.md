@@ -1,7 +1,7 @@
 ---
-title: "Application Management via AnchoreCTL"
-linkTitle: "Application Management via AnchoreCTL"
-weight: 7
+title: "Application Management - AnchoreCTL"
+linkTitle: "Application Management - AnchoreCTL"
+weight: 4
 ---
 
 

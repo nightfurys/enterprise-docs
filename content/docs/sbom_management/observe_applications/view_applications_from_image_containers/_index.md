@@ -9,7 +9,7 @@ To work with image container data, you must first load the image container data 
 For information about analyzing images, see [Image Analysis](https://docs.anchore.com/current/docs/using/ui_usage/images/).
 For information about adding Images, see [Scanning Repositories](https://docs.anchore.com/current/docs/using/cli_usage/repositories/).
 
-![Container Image Application summary](container-images.png)
+![Container Image Application summary](container_images.png)
 
 When you select an application version, you will see a list of artifacts associated with that application version.
 

@@ -1,7 +1,7 @@
 ---
-title: "Application Version Management via the Anchore API"
-linkTitle: "Application Version Management via the Anchore API"
-weight: 4
+title: "Application Version Management - Anchore API"
+linkTitle: "Application Version Management - Anchore API"
+weight: 1
 ---
 
 Use the Anchore API to manage your application versions.  For more information about using Anchore APIs via Swagger, see: [Using the Anchore API](https://docs.anchore.com/current/docs/using/api_usage/).

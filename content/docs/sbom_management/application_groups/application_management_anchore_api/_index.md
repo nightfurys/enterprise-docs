@@ -1,6 +1,6 @@
 ---
-title: "Application Management via the Anchore API"
-linkTitle: "Application Management via the Anchore API"
+title: "Application Management - Anchore API"
+linkTitle: "Application Management - Anchore API"
 weight: 3
 ---
 

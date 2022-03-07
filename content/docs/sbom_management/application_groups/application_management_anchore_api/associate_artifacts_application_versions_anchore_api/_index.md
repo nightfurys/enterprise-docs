@@ -1,7 +1,7 @@
 ---
-title: "Associating Artifacts with Application Versions via the Anchore API"
-linkTitle: "Associating Artifacts with Application Versions via the Anchore API"
-weight: 5
+title: "Associate Artifacts with Application Versions - Anchore API"
+linkTitle: "Associate Artifacts with Application Versions - Anchore API"
+weight: 2
 ---
 
 
@@ -44,7 +44,7 @@ Note the fields specific to image artifacts in contrast to the source artifact i
 }
 ```
 
-## List All Associated Artifacts
+### List All Associated Artifacts
 
 Each artifact in the response body will contain an `artifact_association_metadata` block with an `association_id` field in it. This field uniquely identifies the association between the artifact and the application version, and is used in requests to remove the association.
 
@@ -56,7 +56,7 @@ To list all artifacts associated with an application version, GET `http://<host:
 
 To filter the results by artifact type, add the `artifact_types=<source,image>` query parameter.
 
-## Remove an Artifact Association
+### Remove an Artifact Association
 
 Send a DELETE request to `http://<host:port>/v1/enterprise/applications/<application_id>/versions/<application_version_id>/artifacts/<association_id>`.
 

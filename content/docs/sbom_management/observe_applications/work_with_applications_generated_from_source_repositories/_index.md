@@ -1,6 +1,6 @@
 ---
-title: "How to Work with Applications Generated from Source Repositories"
-linkTitle: "How to Work with Applications Generated from Source Repositories"
+title: "Work with Applications Generated from Source Repositories"
+linkTitle: "Work with Applications Generated from Source Repositories"
 weight: 4
 ---
 
@@ -22,7 +22,7 @@ Once the data is made available to Anchore Enterprise, you can then view and gen
 
 The Sources analysis screen for an artifact shows you a summary of what is in that artifact.
 
-![Container Images Analysis](container-image-analysis.png)
+![Source Repository Analysis](artifact-analysis-screen-source.png)
 
 5. From the analysis screen, you can perform the following actions.
 

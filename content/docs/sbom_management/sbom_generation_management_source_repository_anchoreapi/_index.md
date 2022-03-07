@@ -1,7 +1,7 @@
 ---
-title: "SBOM Generation and Management from a Source Repository using Anchore API
+title: "SBOM Generation and Management from Source Repository - Anchore API
 "
-linkTitle: "SBOM Generation and Management from a Source Repository using Anchore API
+linkTitle: "SBOM Management from Source Repository - Anchore API
 "
 weight: 4
 ---

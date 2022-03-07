@@ -1,10 +1,10 @@
 ---
-title: "Associating Artifacts with Application Versions via AnchoreCTL"
-linkTitle: "Associating Artifacts with Application Versions via AnchoreCTL"
+title: "Associate Artifacts with Application Versions - AnchoreCTL"
+linkTitle: "Associate Artifacts with Application Versions - AnchoreCTL"
 weight: 9
 ---
 
-## Add an Artifact Association
+### Add an Artifact Association
 
 The following commands require source or image artifacts to already be added to the Anchore Enterprise instance before they can be associated with the application version. 
 
@@ -24,7 +24,7 @@ To associate a source artifact:
 To associate an image artifact:
 `anchorectl application version artifact add <application_id> <application_version_id> source --uuid=<source_uuid>`
 
-## List All Associated Artifacts
+### List All Associated Artifacts
 
 Each artifact in the response body will contain an `artifact_association_metadata` block with an `association_id` field in it. This field uniquely identifies the association between the artifact and the application version, and is used in requests to remove the association.
 
@@ -39,7 +39,7 @@ To list all artifacts associated with an application version:
 To filter the results by artifact type, add the argument `--artifact_types=<source,image>` to the end of the command.
 
 
-## Remove an Artifact Association
+### Remove an Artifact Association
 
 Get the `association_id` of one of the associated artifacts and run the following command: 
 `anchorectl application version artifact delete <application_id> <application_version_id> <association_id>`

@@ -1,6 +1,6 @@
 ---
-title: "How to Work with Applications Generated from Image Containers"
-linkTitle: "How to Work with Applications Generated from Image Containers"
+title: "Work with Applications Generated from Image Containers"
+linkTitle: "Work with Applications Generated from Image Containers"
 weight: 3
 ---
 
@@ -12,7 +12,7 @@ Once the data is made available to Anchore Enterprise, you can then analyze it. 
 
 2. Click **Applications** > **Container Images** to view a summary of the applications in your container images. The information is categorized by applications, with sub-categories of application versions available from image containers that you previously loaded. Notice the list of applications and application versions, as well as any artifacts in the applications.
 
-![Container Image Application summary](container-images.png)
+![Container Image Application summary](container_images.png)
 
 3. Click **SBOM Report Updated Application name** to download a report in JSON format for everything in an application. Or, click **SBOM Report** to download a report for everything in an artifact.
 

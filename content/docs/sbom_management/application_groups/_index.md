@@ -1,7 +1,7 @@
 ---
 title: "Anchore Enterprise Application Groups"
 linkTitle: "Anchore Enterprise Application Groups"
-weight: 2
+weight: 3
 ---
 
 Anchore Enterprise lets you model your versioned applications to create a comprehensive view of the vulnerability and security health of the projects your teams are building across the breadth of your Software Delivery Lifecycle. 

@@ -26,6 +26,6 @@ An artifact is a generic term that encompasses any SDLC artifact that can be ass
 One important distinction is that these endpoints and commands are operating on the association between artifacts and application versions, not on the artifacts themselves. A source or image must already be added to Anchore Enterprise before it can be associated with an application. Similarly, removing the association with an application version does not remove the artifact from Anchore Enterprise. It can later be reassociated with the application version, or another application version. 
 
 
-## Application Version SBOMs
+### Application Version SBOMs
 
 Once an application version has artifacts associated with it, users can generate an application version SBOM, which aggregates the SBOMs for all of the artifacts associated with the application version.
