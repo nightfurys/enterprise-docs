@@ -1,7 +1,7 @@
 ---
 title: "Troubleshooting"
 linkTitle: "Troubleshooting"
-weight: 9
+weight: 10
 ---
 
 This guide will walkthrough some general troubleshooting tips with your Anchore Enterprise instance. When troubleshooting Anchore Enterprise, the recommend approach is to first verify all Anchore services are up, use the event subsystem to narrow down particular issues, and then navigate to the logs for specific services to find out more information.

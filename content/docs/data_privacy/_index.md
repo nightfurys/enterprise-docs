@@ -1,7 +1,7 @@
 ---
 title: "Data Privacy"
 linkTitle: "Data Privacy"
-weight: 7
+weight: 8
 ---
 
 Anchore Enterprise is designed to run locally and does not share any data with Anchore Inc. or any third party.
