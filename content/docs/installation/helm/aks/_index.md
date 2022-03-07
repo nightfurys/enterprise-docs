@@ -31,7 +31,7 @@ Anchore maintains a [Helm chart](https://github.com/anchore/anchore-charts/blob/
 
 To make the necessary configurations to the Helm chart, create a custom `anchore_values.yaml` file and reference it during installation. There are many options for configuration with Anchore, this document is intended to cover the minimum required changes to successfully install Anchore Enterprise in AKS. 
 
-**Note:** For this installation, an NGINX ingress controller will be used. For more information, see: [Microsoft Documentation](https://docs.microsoft.com/en-us/azure/aks/ingress-basic).
+**Note:** For this installation, an NGINX ingress controller will be used. You can read more about Kubernetes Ingress in AKS [here](https://docs.microsoft.com/en-us/azure/aks/ingress-basic).
 
 
 ### Configurations

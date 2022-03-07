@@ -36,7 +36,7 @@ In this example the Anchore version is 0.7.0 and the database schema is version 
 
 ### Pre-upgrade Procedure
 
-Prior to upgrading Anchore, it is highly recommended to perform a database backup/snapshot by stopping your Anchore installation, and back up the database in its entirety. There is no automatic downgrade capability, thus the only way to downgrade after an upgrade (whether it succeeds or fails) is to restore your database contents to a state from a prior version of Anchore, and explicitly run the compatible version of Anchore against the corresponding database contents.
+Prior to upgrading Anchore, it is highly recommended to perform a database backup/snapshot by stopping your Anchore installation, and backup the database in its entirety. There is no automatic downgrade capability, thus the only way to downgrade after an upgrade (whether it succeeds or fails) is to restore your database contents to a state from a prior version of Anchore, and explicitly run the compatible version of Anchore against the corresponding database contents.
 
 Whether or not you wish to have the ability to downgrade, we recommend backing up your Anchore database prior to upgrading the software as a best practice.
 
