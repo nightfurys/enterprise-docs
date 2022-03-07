@@ -51,4 +51,4 @@ This will have the effect of adding some containers to the anchoreAPI deployment
 
 #### Option 3: Manual Configuration
 
-See: [Manual Configuration of RBAC of RBAC Mode for Upgrading Anchore Engine to Enterprise](https://docs.anchore.com/current/docs/installation/rbac/manual_rbac_config/) for more information on this process and the steps involved.
+For more information, see [Manual Configuration of RBAC](https://docs.anchore.com/current/docs/installation/rbac/manual_rbac_config/).

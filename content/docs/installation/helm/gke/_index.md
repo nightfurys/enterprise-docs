@@ -11,7 +11,7 @@ Get an understanding of installing Anchore Enterprise on a Google Kubernetes Eng
 - [Helm](https://helm.sh/) client installed on local host.
 - [Anchore CLI](https://docs.anchore.com/current/docs/installation/anchore_cli/) installed on local host.
 
-Once you have a GKE cluster up and running with worker nodes launched, you can verity it using the followiing command.
+Once you have a GKE cluster up and running with worker nodes launched, you can verify it by using the followiing command.
 
 ```
 $ kubectl get nodes
