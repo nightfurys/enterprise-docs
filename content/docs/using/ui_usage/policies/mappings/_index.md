@@ -6,7 +6,6 @@ weight: 3
 
 ## Introduction
 
-![alt text](Mappings.jpeg)
 
 The Policy Mapping editor creates rules that define which policies and whitelists should be used to perform the policy evaluation of an image based on the registry, repository name and tag of the image.
 Using the policy editor organizations can set up multiple different policies that will be used on different images based on use case.
@@ -33,7 +32,7 @@ The empty policy bundle includes no mappings. Press the ![alt text](LetsAddOne.j
 
 ![alt text](MappingsTab.png)
 
-The *Add a New Mapping* dialog will be displayed and includes mandatory fields for *name, policy, registry, repository and tag*. The Whitelist(s) field is optional.
+The *Add a New Mapping* dialog will be displayed and includes mandatory fields for *name, policy, registry, repository and tag*. The Allowlist(s) field is optional.
 
 ![alt text](AddNewMapping.png)
 
