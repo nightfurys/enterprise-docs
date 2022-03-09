@@ -39,7 +39,7 @@ A _policy_ is composed of a set of rules that are used to perform an evaluation 
 
 Policies can be deployed site wide, or customized to run against specific sources, container images, or categories of application. For additional information, refer to the [Policy]({{< ref "/docs/overview/concepts/policy" >}}) concepts section.
 
-Once a policy has been applied to a a source repository or image container, it can return one of two results:
+Once a policy has been applied to a source repository or image container, it can return one of two results:
 
 <img src="policy/PolicyPassBtn.png" class="img_tiny" /> indicating that source or image *complies* with your policy
 
