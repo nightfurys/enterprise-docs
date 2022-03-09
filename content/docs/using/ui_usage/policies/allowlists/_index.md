@@ -31,13 +31,13 @@ If you have a JSON document containing an existing Allowlist, then you can uploa
 
 ![alt text](upload-paste-allowlist.png)
 
-2. Allowlist files can be dragged into the dropzone, indicated by a blue plus sign. Or, you can click in the dropzone load it from a local filesystem.
+2. Drag an Allowlist file into the dropzone, indicated by a blue plus sign. Or, you can click in the dropzone and load it from a local filesystem.
 
 3. Click **OK** to upload the Allowlist. The system will perform a validation for the Allowlist. Only validated Allowlists may be stored by Anchore Enterprise.
 
 ### Copying a Allowlists
 
-An existing Allowlist can be copied.
+You can copy an existing Allowlist, give it a new name, and use it for a policy evaluation.
 
 1. From the Tools drop down, select **Copy Allowlist**.
 
@@ -51,7 +51,7 @@ An existing Allowlist can be copied.
 
 ### Downloading Allowlists
 
-An existing Allowlists can be downloaded as a JSON file.
+You can download an existing Allowlists as a JSON file.
 
 1. From the Tools drop down, click **Download to JSON**.
 
@@ -69,9 +69,13 @@ The Allowlists editor allows new Allowlist entries to be created, and existing e
 
 Anchore Enterprise supports Allowlisting any policy trigger, however the Allowlists editor currently supports only adding Anchore Security checks, allowing vulnerabilities to be Allowlisted.
 
-2. Choose a gate for the Allowlist, for example, **vulnerabilities**. A vulnerabilities Allowlists entry includes two elements:
+
+2. Choose a gate for the Allowlist, for example, **vulnerabilities**. 
 
 ![alt text](edit-allowlist-gate.png)
+
+A vulnerabilities Allowlists entry includes two elements: A CVE / Vulnerability Identifier and a Package.
+
 
 3. Enter a CVE / Vulnerability Identifier. The CVE/Vulnerability Identifier field contains the vulnerability that should be matched by the Allowlists. This can include wildcards.
 
@@ -80,12 +84,14 @@ Anchore Enterprise supports Allowlisting any policy trigger, however the Allowli
 For example: CVE-2017-7246. This format should match the format of the CVEs shown in the image vulnerabilities report.
 Wildcards are supported, however, care should be taken with using wildcards to prevent Allowlisting too many vulnerabilities.
 
+
 4. Enter a package. The package name field contains the package that should be matched with a vulnerability.
 For example libc-bin.
 
 ![alt text](WhitelistPackageInput.jpeg)
 
-Wildcards are also supported within the Package name field.
+
+Wildcards are also supported within the **Package** name field.
 
 An Allowlists entry may include entries for both the CVE and Package field to specify an exact match, for example: Vulnerability: CVE-2005-2541  Package: tar.
 
@@ -99,11 +105,12 @@ A good example of a valid use case for a wildcard in the CVE / Vulnerability Ide
 
 ![alt text](edit-allowlist-vulnerabilities-screen.png)
 
-Click ![alt text](describe.jpeg) to edit an Allowlist.
 
-Click **Remove** to delete an Allowlist.
+5. Optional: Click ![alt text](describe.jpeg) to edit an Allowlist.
 
-Ensure that all changes are saved before exiting out of the Edit Allowlists Items Page. At that point the edits will be sent to Anchore Enterprise.
+6. Optional: Click **Remove** to delete an Allowlist.
+
+7. Ensure that all changes are saved before exiting out of the Edit Allowlists Items Page. At that point the edits will be sent to Anchore Enterprise.
 
 ![alt text](edit-allowlist-vulnerabilities-screen.png)
 

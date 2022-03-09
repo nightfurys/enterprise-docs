@@ -30,27 +30,25 @@ The workflow for adding Allowed or Denied images is identical.
 
 2. Images can be referenced in one of three ways:
 
-- By Name: including the registry, repository and tag
-   eg. docker.io/library/centos:latest
+- By Name: including the registry, repository and tag. For example: `docker.io/library/centos:latest`
 
    The name does not have to be unique but it is recommended that the identifier is descriptive.
 
    ![alt text](image-name.png)
 
-- By Image ID: including the full image ID
-   eg. e934aafc22064b7322c0250f1e32e5ce93b2d19b356f4537f5864bd102e8531f
+- By Image ID: including the full image ID. For example: `e934aafc22064b7322c0250f1e32e5ce93b2d19b356f4537f5864bd102e8531f`
 
    ![alt text](image-id.png)
 
    The full Image ID should be entered. This will be a 64 hex characters. There are a variety of ways to retrieve the ID of an image including using the anchore-cli, Anchore UI, and Docker command.
    
 
-- By Image Digest: including the registry, repository and image digest of the image.
-   eg.  docker.io/library/centos@sha256:989b936d56b1ace20ddf855a301741e52abca38286382cba7f44443210e96d16
+- By Image Digest: including the registry, repository and image digest of the image. For example: `docker.io/library/centos@sha256:989b936d56b1ace20ddf855a301741e52abca38286382cba7f44443210e96d16`
 
    ![alt text](image-digest.png)
 
 3. Click **OK** to add the Allowed or Denied Image item to your bundle.
+
 
 See the following sections for more details about the **Name**, **Image ID**, and **Image Digest**. 
 
@@ -58,21 +56,23 @@ For most use cases, it is recommended that the image digest is used to reference
 
 If an image appears on both the Allowed Images and Denied Images lists, then the Denied Image takes precedence and the image will be failed.
 
+
 **Note:** See Evaluating Images against Policies for details on image policy evaluation.
 
-The Allowed Images list will show a list of any Trusted Images defined by the system includes the following fields:
+
+The Allowed Images list will show a list of any allowed images defined by the system includes the following fields:
 
 - **Allowlist Name**
-  A user friendly name to identify the image(s)
+  A user friendly name to identify the image(s).
 
 - **Type**
-  Describes how the image has been specified. By **Name**, **ID**, or **Digest**
+  Describes how the image has been specified. By **Name**, **ID**, or **Digest**.
 
 - **Image**
-  The specification used to define the image
+  The specification used to define the image.
 
 - **Actions**
-  The actions you can set for the allowed image..
+  The actions you can set for the allowed image.
 
   The ![alt text](clipboard.jpeg) button can be used to copy the image specification into the clipboard. 
 
@@ -111,16 +111,13 @@ By default the docker CLI displays a short ID, the long ID is required and it ca
 
 When adding an image by Digest the following fields are required:
 
-- Registry
-  eg. docker.io
+- Registry. For example: `docker.io`
 
-- Repository
-  eg. library/debian
+- Repository. For example: `library/debian`
 
-- Digest
-  eg. sha256:de3eac83cd481c04c5d6c7344cd7327625a1d8b2540e82a8231b5675cef0ae5f
+- Digest. For example: `sha256:de3eac83cd481c04c5d6c7344cd7327625a1d8b2540e82a8231b5675cef0ae5f`
 
-The full identifier for this image is: docker.io/library/debian@sha256:de3eac83cd481c04c5d6c7344cd7327625a1d8b2540e82a8231b5675cef0ae5f
+The full identifier for this image is: `docker.io/library/debian@sha256:de3eac83cd481c04c5d6c7344cd7327625a1d8b2540e82a8231b5675cef0ae5f`
 
 **Note:** The tag is not used when referencing an image by digest.
 
@@ -150,14 +147,11 @@ docker.io/debian    latest              sha256:de3eac83cd481c04c5d6c7344cd732762
 
 When adding an image by **Name**, the following fields are required:
 
-- Registry
-  eg. docker.io
+- Registry. For example: `docker.io`
 
-- Repository
-  eg. library/debian
+- Repository. For example: `library/debian`
 
-- Tag
-  eg. latest.
+- Tag. For example: `latest`
 
 **Note:** Wild cards are supported, so to trust all images from docker.io you would enter **docker.io** in the Registry field, and add a * in the Repository and Tag fields.
 
