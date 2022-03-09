@@ -9,104 +9,139 @@ weight: 4
 A bundle container 5 elements:
 
 - **Policies**
-  A policy is made up from a set of rules that are used to perform an evaluation on a container image. These rules can include checks on security vulnerabilities, package whitelists, blacklists, configuration file contents, presence of credentials in image, manifest changes, exposed ports or any user defined checks. These policies can be deployed site wide or customized for specific images or categories of applications.
-  A policy bundle may contain one or more named policies.
+  A policy is made up from a set of rules that are used to perform an evaluation on a source repository or container image. These rules can include checks on security vulnerabilities, package allowlists, denylists, configuration file contents, presence of credentials, manifest changes, exposed ports, or any user defined checks. These policies can be deployed site wide or customized for specific source repositories, container images, or categories of applications. A policy bundle may contain one or more named policies.
 
-- **Whitelists**
-  A whitelist contains one or more exceptions that can be used during policy evaluation. For example allowing a CVE to be excluded from policy evaluation.
-  A policy bundle may contain multiple whitelists.
+- **Allowlists**
+  An allowlist contains one or more exceptions that can be used during policy evaluation. For example allowing a CVE to be excluded from policy evaluation. A policy bundle may contain multiple allowlists.
 
 - **Mappings**
-  A policy mapping defines which policies and whitelists should be used to perform the policy evaluation of a given image based on its registry, repository name, and tag.
-  A policy bundle may contain multiple mappings including wildcard mappings that apply to multiple tags.
+  A policy mapping defines which policies and allowlists should be used to perform the policy evaluation of a given source repository or container image. A policy bundle may contain multiple mappings including wildcard mappings that apply to multiple elements.
 
-- **Trusted Image List**
-  A Trusted Image list defines one or more images that will always pass policy evaluation regardless of any policy violations.
-  Trusted images can be specified by name, image ID or image Digest.
-  A policy bundle contains a single list of Trusted Images
+- **Allowed Image**
+  An allowed image defines one or more images that will always pass policy evaluation regardless of any policy violations. Allowed images can be specified by name, image ID, or image digest. A policy bundle contains a single list of allowed images.  
 
-- **Blacklisted Image List**
-  The Blacklisted Image list defines one or more images that will always fail policy evaluation.
-  Blacklisted images can be specified by name, image ID or image Digest.
-  A policy bundle contains a single list of Blacklisted Images
+- **Denied Images**
+  The Denied Images list defines one or more images that will always fail policy evaluation. Denied images can be specified by name, image ID, or image digest. A policy bundle contains a single list of denied images.
 
 ### Policy Bundles
 
 The Policy Manager displays a list of bundles loaded in the system. Each Policy Bundle has a unique name, unique ID (UUID), and optionally a description.
 
-![alt text](UIPolicyBundle.png)
+![alt text](policy-bundles-list.png)
 
-Anchore Enterprise supports multiple bundles. The Anchore API, CLI, and CI/CD plugins support specifying a Bundle when requesting an image evaluation. For example, the development team may use a different set of policy checks than the operations team. In this case, the development team would specify their bundle ID as part of their policy evaluation request.
+Anchore Enterprise supports multiple bundles. The Anchore API, CLI, and CI/CD plugins support specifying a bundle when requesting an source repository or container image evaluation. For example, the development team may use a different set of policy checks than the operations team. In this case, the development team would specify their bundle ID as part of their policy evaluation request.
 
 If no bundle ID is specified, then Anchore Enterprise will use the active bundle which can be considered as the default bundle. Only one bundle can be set as default/active at any time. This bundle will be highlighted with a green ribbon.
 
-![alt text](GreenPolicyRibbon.png)
 
-**Note:** Bundles which are not marked as Active can still be explicitly requests as part of policy evaluation. 
+**Note:** Bundles which are not marked as **Active** can still be explicitly requested as part of a policy evaluation. 
 
-If multiple users are accessing the Policy Manager or if policy bundles are being added or removed through the API or CLI then you may update the list of bundles using the refresh button.
+If multiple users are accessing the Policy Manager, or if policy bundles are being added or removed through the API or CLI, then you may update the list of bundles using the clicking **Refresh the Bundle Data**.
 
-![alt text](RefreshBundle.png)
+![alt text](refresh-bundle-data.png)
 
-The following command can be run to list policy bundles using the Anchore CLI
+The following command can be run to list policy bundles using the Anchore CLI:
 
 `anchore cli policy list`
 
-### Adding a Policy Bundle
+### Create a New Policy Bundle
 
-A new, empty policy bundle can be created by pressing the Create New Policy button.
+1. To create a new, empty policy bundle, click **Create New Bundle**.
 
-You will be prompted to name the policy bundle. This name should be unique. 
+![alt text](create-new-bundle-with-arrow.png)
 
-A description is optional but recommended. Once created a unique ID (UUID) will be automatically created by Anchore Enterprise.
+2. Add a name for the policy bundle. This name should be unique.
 
-![alt text](UICreateBundle.png)
+3. Optional: You can add a description. 
 
-### Uploading a Policy Bundle
+![alt text](create-new-policy-bundle-namedescription.png)
 
-If you have a JSON document containing an existing policy bundle then this may be uploaded into Anchore Enterprise.
+The following example shows a bundle called **test**. Notice the unique Bundle ID (UUID) that was automatically created by Anchore Enterprise.
 
-Selecting the Upload Bundle button will present a dialog allowing for a policy bundle to be uploaded or manually edited in the native JSON format.
+![alt text](bundle-created-results.png)
 
-![alt text](UIBundleUpload.png)
+### Upload a Policy Bundle
 
-Policy Bundle files can be dragged into the dropzone, indicated by a blue plus sign, or clicking in the dropzone will open a file selector dialog allowing a bundle to be loaded from the local filesystem.
+If you have a JSON document containing an existing policy bundle, then you can upload it into Anchore Enterprise.
 
-Selecting OK will perform validation on a bundle. Only validated bundles may be stored by Anchore Enterprise.
+1. Click Upload / Paste Bundle to upload or paste a valid policy bundle JSON.
 
-The following command can be run to add policy bundles using the Anchore CLI
+![alt text](upload-paste-policy-bundle.png)
+
+2. Policy Bundle files can be dragged into the dropzone, indicated by a blue plus sign. Or, you can click in the dropzone to load a bundle from the local file system.
+
+3. Click **OK** to perform a validation on a bundle. Only validated bundles may be stored by Anchore Enterprise.
+
+
+**Note**: The following command can be run to add policy bundles using the Anchore CLI
 
 `anchore-cli policy add /path/to/my/policy/bundle.json`
 
-### Editing a Policy Bundle
 
-Selecting the Edit Policy button will open the policy bundled viewer which is described in the following page.
+### Edit a Policy Bundle
 
-### Copying a Policy Bundle
+You can edit existing policy bundles at any time, including the policies, allowlists, mappings, and allowed or denied images. 
 
-The user will be prompted to enter a unique name. The description can be updated.
+1. Click Edit Policy button will open the policy bundled viewer which is described in the following page.
 
-![alt text](UICopyBundle.png)
+![alt text](edit-policy-navigation-bar.png)
 
-### Deleting a Policy Bundle
+- Policies tab: Edit or add policies and policy rules. See the policies section for more information.
 
-![alt text](UIBundleTools.png)
+![alt text](allowlists-tab.png)
 
-From the Tools menu the Delete Bundle menu option will bring up a dialog to confirm deletion of an existing policy bundle.
+- Allowlists tab: Edit or add allowlists associated with the policy bundle.
 
-**Note:** The active (default) bundle cannot be deleted. To delete the active bundle first you must mark another bundle as active.
+![alt text](mappings-tab.png)
+
+- Mappings tab: Edit or add mappings and mapping rules. See the Policy Mappings section for more information.
+
+![alt text](allowed-denied-images-tab.png)
+
+- Allowed / Denied Images tab: Edit or add images that you want allowed or denied in a policy bundle. Each of the bundle elements can be edited by selecting the appropriate tab in the navigation bar.
+
+### Copy an Existing Policy Bundle
+
+If you already have a policy bundle that you would like to use as a base for another bundle, you can make a copy of it, give it a new name, and then work with the policies, mappings, allowlists, and allowed or denied images. 
+
+1. From the Tools list, select **Copy Bundle**.
+
+![alt text](actions-edit-policy.png)
+
+2. Enter a unique name for the copy of the bundle. 
+
+![alt text](copy-bundle.png)
+
+3. You can optionally add a description to explain the bundle copy.
+
+4. Click **OK**.
+
+### Delete a Policy Bundle
+
+If you no onger use a policy bundle, you can delete it. An active (default) bundle cannot be deleted. To delete the active bundle first you must mark another bundle as active.
+
+1. From the Tools menu, select **Delete Bundle**. 
+
+![alt text](delete-bundle-menu.png)
+
+2. Click Yes to confirm that you want to delete the bundle. 
+
+**Warning*: Once the bundle is deleted, you cannot recover it.
 
 ![alt text](UIDeleteBundle.png)
 
-The following command can be run to list delete a bundle using the Anchore CLI. The policy must be referenced by its UUID
+**Note**: Use the following command to list delete a bundle using the Anchore CLI. The policy must be referenced by its UUID.
 
 `$ anchore-cli policy del 2c53a13c-1765-11e8-82ef-23527761d060`
 
-### Downloading a Policy Bundle
+### Download a Policy Bundle
 
-![alt text](UIBundleTools.png) 
-From the Tools menu the Download to JSON menu option will bring up a file dialog to chose a location and name to save the downloaded JSON file.
+1. From the Tools menu, select **Download to JSON**. 
 
-The following command can be run to download a bundle using the Anchore CLI. The policy must be referenced by its UUID
+![alt text](download-bundle.png) 
+
+2. The JSON file is downloaded just like any other downloaded file to your computer. Save the downloaded JSON file to your location of choice.
+
+**Note**: Use the following command to download a bundle using the Anchore CLI. The policy must be referenced by its UUID.
 
 `$ anchore-cli policy get 2c53a13c-1765-11e8-82ef-23527761d060  --detail > bundle.json`
