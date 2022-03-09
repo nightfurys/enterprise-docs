@@ -33,7 +33,7 @@ In this example, an imaged named **registry.example.com/anchore/webapi:latest** 
 
 The mappings are applied in order, from top to bottom and the system will stop at the first match.
 
-**Note**: The allowed images and denied images lists take precedence over the mapping. See [this document]({{< ref "/docs/using/ui_usage/policies/image_whitelist_blacklist" >}}) for details.
+**Note**: The allowed images and denied images lists take precedence over the mapping. See [this document]({{< ref "/docs/using/ui_usage/policies/allowed_denied_images" >}}) for details.
 
 4. The empty policy bundle includes no mappings. Click **Let's add one!** to add your first mapping.
 
