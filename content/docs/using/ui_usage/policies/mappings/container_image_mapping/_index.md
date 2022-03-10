@@ -10,17 +10,18 @@ The container image policy mapping editor creates rules that define which polici
 
 ### Create a new Image Container Mapping ###
 
-1. Add a new mapping by clicking **Add New Mapping**, then select **Container Images** to create the mapping from a container image.
+1. From the Policy Bundles screen, click **Mappings**.
+2. Click **Add New Mapping**, then select **Container Images** to create the mapping from a container image.
 
 ![alt text](add-new-mapping-select-container.png)
 
 
-2. From the Add New Container Image Mapping screen, add a name for the mapping, the policy for which the mapping will apply (added automatically), a registry, a repository, and a tag.  You can optionally add an allowlist and set the position for the mapping.
+3. From the Add New Container Image Mapping screen, add a name for the mapping, the policy for which the mapping will apply (added automatically), a registry, a repository, and a tag.  You can optionally add an allowlist and set the position for the mapping.
 
 ![alt text](add-new-container-image-mapping.png)
 
 
-3. Using the policy editor, you can set up different policies that will be used on different images based on use case. For example the policy applied to a web facing service may have different security and operational best practices rules than a database backend service.
+4. Using the policy editor, you can set up different policies that will be used on different images based on use case. For example the policy applied to a web facing service may have different security and operational best practices rules than a database backend service.
 Mappings are set up based on the Registry, Repository, and Tag of an image. Each field supports wildcards.
 
 For example:
@@ -39,10 +40,10 @@ The mappings are applied in order, from top to bottom and the system will stop a
 **Note**: The allowed images and denied images lists take precedence over the mapping. See [this document]({{< ref "/docs/using/ui_usage/policies/allowed_denied_images" >}}) for details.
 
 
-4. The empty policy bundle includes no mappings. Click **Let's add one!** to add your first mapping.
+5. The empty policy bundle includes no mappings. Click **Let's add one!** to add your first mapping.
 
 
-5. From **Add a New Container Image Mapping**, fill in the mandatory fields for **Name**, **Policy**, **Registry**, **Repository** and **Tag**. The **Allowlists** and **Position** fields are optional. See the following table for more information about these fields.
+6. From **Add a New Container Image Mapping**, fill in the mandatory fields for **Name**, **Policy**, **Registry**, **Repository** and **Tag**. The **Allowlists** and **Position** fields are optional. See the following table for more information about these fields.
 
 ![alt text](add-new-container-image-screen.png)
 

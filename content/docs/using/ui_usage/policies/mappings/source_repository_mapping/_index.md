@@ -14,7 +14,7 @@ Mappings are set up based on the **Host** and **Repository** of a source reposit
 
 ### Create a Source Repository Mapping ###
 
-1. From the Policy Bundles screen, cick **Mappings**.
+1. From the Policy Bundles screen, click **Mappings**.
 
 ![alt text](policy-bundle-mapping-tab-with-arrows.png)
 

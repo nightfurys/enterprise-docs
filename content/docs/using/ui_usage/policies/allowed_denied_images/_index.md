@@ -6,15 +6,13 @@ weight: 6
 
 ## Introduction
 
-You can add or edit Allowed or Denied Images for your policy bundle rules. 
+You can add or edit allowed or denied images for your policy bundle rules. 
 
-The *Allowed / Denied Images* tab is split into the following two sub tabs:
+The Allowed / Denied Images tab is split into the following two sub tabs:
 
-- **Allowed Images**
-  A list of images which will always pass policy evaluation irrespective of any policies that are mapped to them.
+- **Allowed Images**: A list of images which will always pass policy evaluation irrespective of any policies that are mapped to them.
 
-- **Denied Images**
-  A list if images which will always fail policy evaluation irrespective of any policies that are mapped to them.
+- **Denied Images**: A list if images which will always fail policy evaluation irrespective of any policies that are mapped to them.
 
   ![alt text](allowed-denied-images-tab.png)
 
@@ -28,22 +26,23 @@ The *Allowed / Denied Images* tab is split into the following two sub tabs:
 
 The workflow for adding Allowed or Denied images is identical. 
 
-2. Images can be referenced in one of three ways:
 
-- By Name: including the registry, repository and tag. For example: `docker.io/library/centos:latest`
+2. Images can be referenced in one of the following ways:
+
+- By **Name**: including the registry, repository and tag. For example: `docker.io/library/centos:latest`
 
    The name does not have to be unique but it is recommended that the identifier is descriptive.
 
    ![alt text](image-name.png)
 
-- By Image ID: including the full image ID. For example: `e934aafc22064b7322c0250f1e32e5ce93b2d19b356f4537f5864bd102e8531f`
+- By **Image ID**: including the full image ID. For example: `e934aafc22064b7322c0250f1e32e5ce93b2d19b356f4537f5864bd102e8531f`
 
    ![alt text](image-id.png)
 
    The full Image ID should be entered. This will be a 64 hex characters. There are a variety of ways to retrieve the ID of an image including using the anchore-cli, Anchore UI, and Docker command.
    
 
-- By Image Digest: including the registry, repository and image digest of the image. For example: `docker.io/library/centos@sha256:989b936d56b1ace20ddf855a301741e52abca38286382cba7f44443210e96d16`
+- By **Image Digest**: including the registry, repository and image digest of the image. For example: `docker.io/library/centos@sha256:989b936d56b1ace20ddf855a301741e52abca38286382cba7f44443210e96d16`
 
    ![alt text](image-digest.png)
 
