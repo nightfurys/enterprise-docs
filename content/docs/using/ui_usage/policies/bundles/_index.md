@@ -74,11 +74,11 @@ The following example shows a bundle called **test**. Notice the unique Bundle I
 
 If you have a JSON document containing an existing policy bundle, then you can upload it into Anchore Enterprise.
 
-1. Click Upload / Paste Bundle to upload or paste a valid policy bundle JSON.
+1. Click **Upload / Paste Bundle** to upload or paste a valid policy bundle JSON.
 
 ![alt text](upload-paste-policy-bundle.png)
 
-2. Policy Bundle files can be dragged into the dropzone, indicated by a blue plus sign. Or, you can click in the dropzone to load a bundle from the local file system.
+2.  You can drag Policy Bundle files into the dropzone, indicated by a blue plus sign. Or, you can click in the dropzone to load a bundle from the local file system.
 
 3. Click **OK** to perform a validation on a bundle. Only validated bundles may be stored by Anchore Enterprise.
 
