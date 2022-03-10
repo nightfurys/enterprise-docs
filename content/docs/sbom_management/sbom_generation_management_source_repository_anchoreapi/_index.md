@@ -6,15 +6,15 @@ linkTitle: "SBOM Management from Source Repository - Anchore API
 weight: 4
 ---
 
-Use the Anchore API to generate an application or artifact, and import them from a source repository. You can also get information about the source repository, investigate vulnerability packages by requesting vulnerabilities for a single analyzed source repository, or get any policy evaluations.
+Use the Anchore API to import a source repository artifact from a SBOM file on disk. You can also get information about the source repository, investigate vulnerability packages by requesting vulnerabilities for a single analyzed source repository, or get any policy evaluations.
 
-For more information about using Anchore APIs via Swagger, see: [Using the Anchore API](https://docs.anchore.com/current/docs/using/api_usage/).
+For more information about using Anchore APIs via Swagger, see: [Using the Anchore API]({{< ref "../../using/api_usage" >}}).
 
 The SBOM management API workflow would generally be as follows.
 
 **Note**: Reference the API endpoints in Swagger for the latest information.
 
-1. Use the API to import source repository SBOMs. For example, to create the import “job” (operation) for importing a source.
+1. Once you have [generated a SBOM using anchorectl]({{< ref "/sbom_generation_management_source_repository_anchorectl" >}}), you can use the API to import that SBOM as a *source* artifact. For example, to create the import "operation" (job) for importing a source.
 
 ```
 curl -u admin:foobar -X 'POST' 'http://localhost:8228/v1/enterprise/imports/sources'

@@ -6,7 +6,7 @@ linkTitle: "SBOM Management from Source Repository - AnchoreCTL
 weight: 3
 ---
 
-Use AnchoreCTL to generate an application or artifact, and import them from a source repository. You can also get information about the source repository, investigate vulnerability packages by requesting vulnerabilities for a single analyzed source repository, or get any policy evaluations.
+Use anchorectl to generate a SBOM and import a source repository artifact from a file location on disk. You can also get information about the source repository, investigate vulnerability packages by requesting vulnerabilities for a single analyzed source repository, or get any policy evaluations.
 The workflow would generally be as follows.
 
 1. Generate an SBOM. The format is similar to the following:
@@ -14,94 +14,67 @@ The workflow would generally be as follows.
 For example:
 
 ```
-# ./anchorectl sbom create dir:../../enterprise -o json > enterprise_alpha.json
-[0000]  INFO End User Licensing Agreement
-Usage of this tool requires an Anchore Enterprise License.
-Please check with your system administrator to ensure you have the proper license.
-Unauthorized use of this tool will violate the license terms provided by Anchore, Inc.
-See https://anchore.com for more details.
+$ anchorectl sbom create dir:/path/to/your/source/code -o json > my_sbom.json
 ```
 
-2. Import the SBOM from a source with metadata. This would normally occur as part of a CI/CD pipeline, and the various metadata would be programmatically added via environment variables. The response from AnchoreCTL includes the new ID of the Source in Anchore Enterprise. For example:
+2. Import the SBOM from a source with metadata. This would normally occur as part of a CI/CD pipeline, and the various metadata would be programmatically added via environment variables. The response from anchorectl includes the new ID of the Source in Anchore Enterprise. For example:
 
 ```
-# ./anchorectl source import --sbomFile ./enterprise_alpha.json --branch main --changeAuthor "user name" --executionTime 2002-10-02T15:00:00Z --repoHost github.com --repoName demo --revision 12305233 --workflowName Testing
-[0000]  INFO End User Licensing Agreement
-Usage of this tool requires an Anchore Enterprise License.
-Please check with your system administrator to ensure you have the proper license.
-Unauthorized use of this tool will violate the license terms provided by Anchore, Inc.
-See https://anchore.com for more details.
-[0000]  INFO Transaction complete record: "04a2acfb-8f83-412b-934d-f0b74c5512ac"
+$ anchorectl source import --sbomFile=./my_sbom.json --repoHost github.com --repoName my-project --revision 123456 --branch test --changeAuthor user@domain.com --workflowName default --executionTime 2002-10-02T15:00:00Z
+UUID                                  HOST        REPOSITORY NAME  REVISION  ANALYSIS STATUS  SOURCE STATUS  VCS TYPE  BRANCH NAME  CHANGE AUTHOR      WORKFLOW NAME  WORKFLOW EXECUTION TIME
+c6bd3b3e-a0e6-4b96-b298-4173a126e242  github.com  my-project       123456    analyzed         active         git       test         user@domain.com    default        02 Oct 02 15:00 UTC
 ```
 
-3. List the analyzed source repositories that you have sent to Anchore Enterprise. This step will allow the operator to list all available source repositories within the system and their current status.
+3. List the source repositories that you have sent to Anchore Enterprise. This command will allow the operator to list all available source repositories within the system and their current status.
 ```
-# ./anchorectl source list
-[0000]  INFO End User Licensing Agreement
-Usage of this tool requires an Anchore Enterprise License.
-Please check with your system administrator to ensure you have the proper license.
-Unauthorized use of this tool will violate the license terms provided by Anchore, Inc.
-See https://anchore.com for more details.
+$ anchorectl source list
+UUID                                  ACCOUNT ID  HOST        REPOSITORY NAME  REVISION  ANALYSIS STATUS  SOURCE STATUS  CREATED AT            LAST UPDATED
+e5f3d6f5-9b3c-4709-85a5-56a578330426  admin       gitlab.com  enterprise       123444    analyzed         active         2022-03-04T19:21:50Z  2022-03-04T19:21:50Z
+c6bd3b3e-a0e6-4b96-b298-4173a126e242  admin       github.com  my-project       123456    analyzed         active         2022-03-10T15:42:38Z  2022-03-10T15:42:38Z
 ```
 
-```
-UUID: 04a2acfb-8f83-412b-934d-f0b74c5512ac 
-ACCOUNT ID: admin
-HOST: github.com
-REPOSITORY NAME: demo
-BRANCH NAME: main
-COMMIT HASH: 12305233
-ANALYSIS STATUS: analyzed
-SOURCE STATUS: active
-CREATED AT: 0001-01-01T00:00:00Z
-LAST UPDATED: 0001-01-01T00:00:00Z
-```
-
-4. Retrieve a UUID for the source repository. For example:
-`[0000]  INFO Transaction complete record:"04a2acfb-8f83-412b-934d-f0b74c5512ac"`
-
-5. Fetch the uploaded SBOM for a source from Anchore Enterprise.
+4. Fetch the uploaded SBOM for a source repository from Anchore Enterprise.
 The <id> for this command is taken from the UUID(s) of the listed source repositories.
-`# ./anchorectl source get --id 04a2acfb-8f83-412b-934d-f0b74c5512ac --filename sbom_archive.gzip`
-
 ```
-[0000]  INFO End User Licensing Agreement
-Usage of this tool requires an Anchore Enterprise License.
-Please check with your system administrator to ensure you have the proper license.
-Unauthorized use of this tool will violate the license terms provided by Anchore, Inc.
-See https://anchore.com for more details.
-[0000]  INFO
-### file: '04a2acfb-8f83-412b-934d-f0b74c5512ac' was written to: './sbom_archive.gzip' ###
+$ anchorectl source get-sbom c6bd3b3e-a0e6-4b96-b298-4173a126e242 --filename sbom_archive.json.gz
+$ gunzip sbom_archive.json.gz
 ```
 
-6. Get the info details of the source. Info will return the detailed information about stored source artifacts. For example:
+5. Get detailed information about a source. For example:
 
 ```
-anchorectl source info --id 12e62d96-c2ad-4be0-9a4f-3e9bb170d31c
-UUID: 12e62d96-c2ad-4be0-9a4f-3e9bb170d31c
-HOST: github.com
-REPOSITORY NAME: anchore/enterprise
-REVISION: 754a3c87-f31b-429d-8363-6f38714f9dd6
-ANALYSIS STATUS: analyzed
-SOURCE STATUS: active
-VCS TYPE:
-BRANCH NAME: source-policy
-CHANGE AUTHOR: User email
-WORKFLOW NAME: default
-WORKFLOW EXECUTION TIME: 28 Feb 22 12:37 UTC
+$ anchorectl source info 12e62d96-c2ad-4be0-9a4f-3e9bb170d31c
+UUID                                  HOST        REPOSITORY NAME  REVISION  ANALYSIS STATUS  SOURCE STATUS  VCS TYPE  BRANCH NAME  CHANGE AUTHOR    WORKFLOW NAME  WORKFLOW EXECUTION TIME
+c6bd3b3e-a0e6-4b96-b298-4173a126e242  github.com  my-project       123456    analyzed         active         git       test         user@domain.com  default        02 Oct 02 15:00 UTC
 ```
 
-7. Use anchoreCTL to investigate vulnerability packages by requesting vulnerabilities for a single analyzed source repository. You can choose os, non-os, or all. For example: 
+6. Use anchorectl to investigate vulnerability packages by requesting vulnerabilities for a single analyzed source repository. You can choose os, non-os, or all. For example: 
 
 ```
-anchorectl source vuln 12e62d96-c2ad-4be0-9a4f-3e9bb170d31c
+$ anchorectl source vuln c6bd3b3e-a0e6-4b96-b298-4173a126e242
 os
 non-os
 all
 ```
 
-`anchorectl source vuln 12e62d96-c2ad-4be0-9a4f-3e9bb170d31c all`
+```
+$ anchorectl source vuln c6bd3b3e-a0e6-4b96-b298-4173a126e242 all
+VULNERABILITY ID  PACKAGE       SEVERITY  FIX   CVE REFS        VULNERABILITY URL                                TYPE    FEED GROUP  PACKAGE PATH
+CVE-2020-27534    docker-4.3.1  Medium    None  CVE-2020-27534  https://nvd.nist.gov/vuln/detail/CVE-2020-27534  python  nvd         requirements-test.txt
+...
+```
 
-8. Use anchorectl to delete any individual source repository SBOM artifact from Anchore Enterprise. For example:
+7. Use anchorectl to compute a policy evaluation for a source. For example:
 
-`anchorectl source delete --id d60e8ee0-c5cd-4aa4-bbba-1e46b1bb5edc`
+```
+$ anchorectl source check c6bd3b3e-a0e6-4b96-b298-4173a126e242
+SOURCE ID                             ACCOUNT ID  HOST        REPOSITORY NAME  POLICY ID                             STATUS  CREATED AT            LAST UPDATED
+c6bd3b3e-a0e6-4b96-b298-4173a126e242  vpillai     github.com  my-project       2c53a13c-1765-11e8-82ef-23527761d060  fail    2022-03-10T16:23:24Z  2022-03-10T16:23:24Z
+```
+*(Use -o json option to get more detailed output)*
+
+8. Use anchorectl to delete any individual source repository artifacts from Anchore Enterprise. For example:
+
+```
+$ anchorectl source delete c6bd3b3e-a0e6-4b96-b298-4173a126e242
+```
