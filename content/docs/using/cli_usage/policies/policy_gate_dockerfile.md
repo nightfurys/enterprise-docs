@@ -342,7 +342,7 @@ instruction: The dockerfile instruction to check against. One of:
 }
 ```
 
-### Trigger: image_diff_packages_added
+### Trigger: packages_added
 This trigger warns if a package was added to the SBOM.
 
 #### Parameters
@@ -354,14 +354,14 @@ Raise a warning if packages were added.
 ```
   {
    "action": "WARN",
-   "gate": "image_tag_diff_gate",
-   "trigger": "image_diff_packages_added",
+   "gate": "tag_drift",
+   "trigger": "packages_added",
    "params": [],
    "id": "1ba3461f-b9db-4a6c-ac88-329d38e08df5"
   }
 ```
 
-### Trigger: image_diff_packages_removed
+### Trigger: packages_removed
 This trigger warns if a package was deleted from the SBOM.
 
 #### Parameters
@@ -373,14 +373,14 @@ Raise a warning if packages were deleted.
 ```
   {
    "action": "WARN",
-   "gate": "image_tag_diff_gate",
-   "trigger": "image_diff_packages_removed",
+   "gate": "tag_drift",
+   "trigger": "packages_removed",
    "params": [],
    "id": "de05d77b-1f93-4df4-a65d-57d9042b1f3a"
   }
 ```
 
-### Trigger: image_diff_packages_modified
+### Trigger: packages_modified
 This trigger warns if a package was changed in the SBOM.
 
 #### Parameters
@@ -392,8 +392,8 @@ Raise a warning if packages were changed.
 ```
   {
    "action": "WARN",
-   "gate": "image_tag_diff_gate",
-   "trigger": "image_diff_packages_modified",
+   "gate": "tag_drift",
+   "trigger": "packages_modified",
    "params": [],
    "id": "1168b0ac-df6c-4715-8077-2cb3e016cf63"
   }
