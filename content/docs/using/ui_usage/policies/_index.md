@@ -113,7 +113,8 @@ You can add new policies to a policy bundle.
 1. Click **Add New Policy**.
 2. Select **Source Repository** if you want the new policy to apply to a source,
    or select **Container Image** to have the policy apply to an image.
-3. Type a uniqe name for the new policy (you also add an optional description)
+3. Type a uniqe name for the new policy (you can also add an optional 
+   description)
    and click **OK**.
 4. From the **Edit Source Repository Policy Rules** modal, set up the policy
    rules for the new policy. Start by selecting an item from the **Gate**
