@@ -16,37 +16,37 @@ You can install AnchoreCTL using either archives or provided packages downloaded
 
 #### macOS .dmg
 ```shell script
-curl -o anchorectl.dmg https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.3/anchorectl_0.1.3_darwin_amd64.dmg
+curl -o anchorectl.dmg https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.4/anchorectl_0.1.4_darwin_amd64.dmg
 ```
 
 #### macOS Tar
 ```shell script
-curl -o anchorectl.tar.gz https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.3/anchorectl_0.1.3_darwin_amd64.tar.gz
+curl -o anchorectl.tar.gz https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.4/anchorectl_0.1.4_darwin_amd64.tar.gz
 ```
 
 
 #### Debian
 
 ```shell script
-curl -o anchorectl.deb https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.3/anchorectl_0.1.3_linux_amd64.deb
+curl -o anchorectl.deb https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.4/anchorectl_0.1.4_linux_amd64.deb
 ```
 
 #### RPM
 
 ```shell script
-curl -o anchorectl.rpm https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.3/anchorectl_0.1.3_linux_amd64.rpm
+curl -o anchorectl.rpm https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.4/anchorectl_0.1.4_linux_amd64.rpm
 ```
 
 #### Linux Tar
 
 ```shell script
-curl -o anchorectl.tar.gz https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.3/anchorectl_0.1.3_linux_amd64.tar.gz
+curl -o anchorectl.tar.gz https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.4/anchorectl_0.1.4_linux_amd64.tar.gz
 ```
 
 #### Windows
 
 ```shell script
-curl -o anchorectl.zip https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.3/anchorectl_0.1.3_windows_amd64.zip
+curl -o anchorectl.zip https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.4/anchorectl_0.1.4_windows_amd64.zip
 ```
 
 
@@ -61,7 +61,7 @@ AnchoreCTL can be configured via a config file at the following locations, with 
 
 To get a release-matched version of this configuration file, you can retrieve it as follows:
 ```shell script
-curl -o anchorectl.yaml https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.3/anchorectl.yaml
+curl -o anchorectl.yaml https://anchorectl-releases.s3-us-west-2.amazonaws.com/v0.1.4/anchorectl.yaml
 ```
 Note that it has detailed comments above each configuration value so you know what each does.
 
