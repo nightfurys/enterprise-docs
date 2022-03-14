@@ -16,25 +16,24 @@ Mappings are set up based on the **Host** and **Repository** of a source reposit
 
 1. From the Policy Bundles screen, click **Mappings**.
 
-![alt text](policy-bundle-mapping-tab-with-arrows.png)
+    ![alt text](policy-bundle-mapping-tab-with-arrows.png)
 
 2. Click **Add New Mapping**, then select **Source Repositories**. By selecting source repositories, you are saying you want the new policy rule to apply to a source repository.
 
-![alt text](edit-policy-bundle-add-new-mapping.png)
+    ![alt text](edit-policy-bundle-add-new-mapping.png)
 
-3. From the Add New Source Repository Mapping screen, add a name for the mapping, choose the policy for which the mapping will apply, the position (optional) for the new mapping, a host (such as github.com), and a repository.  You can optionally add an allowlist and set the position for the mapping. 
+3. From the **Add New Source Repository Mapping** dialog, add a name for the 
+   mapping, choose the policy for which the mapping will apply, the position (optional) for the new mapping, a host (such as `github.com`), and a repository.  You can optionally add an allowlist and set the position for the mapping. 
 
-![alt text](add-new-source-mapping.png)
+    ![alt text](add-new-source-mapping.png)
 
-
-| Field Name | Description |
-| ---------- | ----------- |
-| **Name** | A unique name to describe the mapping. 
-| **Position** | Optional: Set the order for the new mapping. |
-| **Policies** | Name of policy to use for evaluation. A drop down will be displayed allowing selection of a single policy. |
-| **Allowlist(s)** | Optional: The allowlist(s) to be applied to the source repository evaluation. Multiple allowlists may be applied to the same source repository. |
-| **Registry** | The name of the registry to match. Note the name should exactly match the name used to submit the source repository for analysis. For example: `foo.example.com:5000` is different to `foo.example.com`. Wildcards are supported. A single * would specify any registry. |
-| **Repository** | The name of the source repository, optionally including namespace. For example: `webapp/foo`. Wildcards are supported. A single * would specify any repository. Partial names with wildcards are supported. For example: `web*/*`. |
-| **Tag** | Tags mapped by this rule. For example: `latest`. Wildcard are supported. A single * would match any tag. Partial names with wildcards are supported. For example: `2018*`. |
+| Field       | Description  |
+|-----------------|------------------------------------------------------|
+| **Name**        | A unique name to describe the mapping.               |
+| **Position**    | Optional: Set the order for the new mapping.         |
+| **Policies**    | Name of policy to use for evaluation. A drop down will be displayed allowing selection of a single policy.|
+| **Allowlist(s)** | Optional: The allowlist(s) to be applied to the source repository evaluation. Multiple allowlists may be applied to the same source|
+| **Host**        | The name of the source host to match. For example: `github.com`.|
+| **Repository**  | The name of the source repository, optionally including namespace. For example: `webapp/foo`. Wildcards are supported. A single `*` would specify any repository. Partial names with wildcards are supported. For example: `web*/*`. |
 
 4. Click **OK** to create the new mapping.
