@@ -131,7 +131,7 @@ information.
 **Allowlists** tab:
 
 Edit or add allowlists associated with the policy bundle. See the
-[Allowlist]({{< ref "/docs/using/ui_usage/policies/allowlists" >}}) section for
+[Allowlists]({{< ref "/docs/using/ui_usage/policies/allowlists" >}}) section for
 more information.
 
 ![alt text](allowlists-tab.png)
