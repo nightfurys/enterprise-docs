@@ -23,17 +23,14 @@ Feed data configuration is set in the config.yaml file used by policy engine ser
 of the configuration file controls the behavior of data to be synced. In addition, the data groups that can be synced depend on the `services.policy_engine.vulnerabilities.provider`, 
 and are explained in detail in the following sections.
 
-Note: The location and format of the config data changed slightly in Anchore Engine 0.10 to reflect some internal refactoring.  Ensure this 
-containers if you are running more than one policy engine. This is usually handled for you by Helm Charts on Kubernetes, for example.
-
-#### Grype  
+#### Feed Groups  
 
 By default, Anchore Enterprise is configured with `grype` as the `services.policy_engine.vulnerabilities.provider` and `grypedb` feed group enabled. 
 The `grypedb` feed group syncs a single Grype database to the policy engine. 
-A Grype database contains data that spans multiple groups. Due to this encapsulation, it is not possible to enable or disable individual feed groups
+A Grype database contains data that spans multiple groups. Due to this encapsulation, it is not possible to enable or disable individual feed groups.
 
 Anchore Enterprise will default to downloading the feed group from a publicly accessible URL maintained by Grype https://toolbox-data.anchore.io/grype/databases/listing.json. 
-The Grype database available from this endpoint does not include third-party/proprietary groups such as VulnDB and MSRC. 
+The Grype database available from this endpoint does not include third-party/proprietary groups such as MSRC. 
 To get those groups, set `url` (or override the environment variable `ANCHORE_GRYPE_DB_URL`) to your local feed service.
 ```
 services:
@@ -51,18 +48,7 @@ services:
             url: ${ANCHORE_GRYPE_DB_URL}
 ```
 
-#### Legacy
-
-If `services.policy_engine.vulnerabilities.provider` is set to `legacy`, Anchore Enterprise will try to sync the following groups 
-- `vulnerabilities` (enabled by default)
-- `nvdv2` (enabled by default)
-- `github` (enabled by default)
-- `vulndb `
-- `msrc`
-- `packages`
-
-Anchore Enterprise will default to downloading feed groups from Anchore's feed service hosted at https://ancho.re/v1/service/feeds and running in AWS in the
-us-west-2 region. This does not include third-party/proprietary groups such as VulnDB and MSRC. 
+Anchore Enterprise will default to downloading feed groups from Anchore's feed service hosted at https://ancho.re/v1/service/feeds. This does not include third-party/proprietary groups such as MSRC. 
 To get those groups, set `url` (or override the environment variable `ANCHORE_FEEDS_URL`) to your local feed service.
 
 ```
@@ -73,7 +59,7 @@ services:
     vulnerabilities:
       ...
       sync:
-        provider: legacy
+        provider: grype
         ...
         data:
           vulnerabilities:
@@ -84,9 +70,6 @@ services:
             url: ${ANCHORE_FEEDS_URL}
           github:
             enabled: true
-            url: ${ANCHORE_FEEDS_URL}
-          vulndb:
-            enabled: ${ANCHORE_FEEDS_VULNDB_ENABLED}
             url: ${ANCHORE_FEEDS_URL}
           microsoft:
             enabled: ${ANCHORE_FEEDS_MICROSOFT_ENABLED}
@@ -174,7 +157,7 @@ vulnerabilities        ubuntu:19.10           2020-03-27T20:41:20.828796        
 ### Using the Config File to Include/Exclude Feeds at System Bootstrap
 
 The most common way to set which feeds are synced is in the config.yaml for the policy engine. By default, 
-the _vulnerabilities_, _nvdv2_, and _github_ feeds are synced to provide good vulnerability matching support for a variety of linux distros
+the _vulnerabilities_, _nvdv2_, and _github_ feeds are synced to provide good vulnerability matching support for a variety of Linux distros
 and application package types. Normally it will not be necessary to modify that set.
 
 To disable a feed or enable a disabled feed, modify the config.yaml's _feeds_ section to:
@@ -357,18 +340,6 @@ vulnerabilities        ubuntu:18.04           success        0                  
 vulnerabilities        ubuntu:18.10           success        0                      0.60s                
 vulnerabilities        ubuntu:19.04           success        0                      0.61s                
 vulnerabilities        ubuntu:19.10           success        0                      0.60s                         
-```
-
-#### Deleting Specific Feed Groups
-
-```
-[anchore@93d6977e2061 ~]$ anchore-cli system feeds config --disable vulnerabilities --group centos:5
-Group                     LastSync                          RecordCount        
-centos:5(disabled)        2020-03-28T00:22:57.113534        1347               
-
-[anchore@93d6977e2061 ~]$ anchore-cli system feeds delete vulnerabilities --group centos:5
-Group                     LastSync        RecordCount        
-centos:5(disabled)        pending         0         
 ```
 
 

@@ -4,14 +4,14 @@ linkTitle: "Google Kubernetes Engine (GKE)"
 weight: 3
 ---
 
-This document will walkthrough the installation of Anchore Enterprise on a Google Kubernetes Engine (GKE) cluster and expose it on the public internet.
+Get an understanding of installing Anchore Enterprise on a Google Kubernetes Engine (GKE) cluster and exposing it on the public Internet.
 ## Prerequisites
 
 - A running GKE cluster with worker nodes launched. See [GKE Documentation](https://cloud.google.com/kubernetes-engine/docs/) for more information on this setup.
 - [Helm](https://helm.sh/) client installed on local host.
 - [Anchore CLI](https://docs.anchore.com/current/docs/installation/anchore_cli/) installed on local host.
 
-Once you have a GKE cluster up and running with worker nodes launched, you can verity via the followiing command.
+Once you have a GKE cluster up and running with worker nodes launched, you can verify it by using the followiing command.
 
 ```
 $ kubectl get nodes
@@ -26,10 +26,10 @@ gke-standard-cluster-1-default-pool-c04de8f1-mz3q   Ready    <none>   78s   v1.1
 Anchore maintains a [Helm chart](https://github.com/anchore/anchore-charts/blob/master/stable/anchore-engine) to simplify the software installation process. An Enterprise installation of the chart will include the following:
 
 - Anchore Enterprise software
-- PostgreSQL (9.6.2)
+- PostgreSQL (10 or higher)
 - Redis (4)
 
-To make the necessary configurations to the Helm chart, create a custom `anchore_values.yaml` file and reference it during installation. There are many options for configuration with Anchore, this document is intended to cover the minimum required changes to successfully install Anchore Enterprise on Google Kubernetes Engine.
+To make the necessary configurations to the Helm chart, create a custom `anchore_values.yaml` file and reference it during installation. There are many options for configuration with Anchore. The following is intended to cover the minimum required changes to successfully install Anchore Enterprise on Google Kubernetes Engine.
 
 **Note:** For this installation, a GKE ingress controller will be used. You can read more about Kubernetes Ingress with a GKE Ingress Controller [here](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress)
 
@@ -98,17 +98,17 @@ anchoreEnterpriseUi:
 
 **Note:** Changed service type to NodePort.
 
-### Anchore Enterprise installation
+### Anchore Enterprise Installation
 
-#### Create secrets
+#### Create Secrets
 
 Enterprise services require an Anchore Enterprise license, as well as credentials with permission to access the private DockerHub repository containing the enterprise software.
 
-Create a kubernetes secret containing your license file:
+Create a Kubernetes secret containing your license file:
 
 `kubectl create secret generic anchore-enterprise-license --from-file=license.yaml=<PATH/TO/LICENSE.YAML>`
 
-Create a kubernetes secret containing DockerHub credentials with access to the private Anchore Enterprise software:
+Create a Kubernetes secret containing DockerHub credentials with access to the private Anchore Enterprise software:
 
 `kubectl create secret docker-registry anchore-enterprise-pullcreds --docker-server=docker.io --docker-username=<DOCKERHUB_USER> --docker-password=<DOCKERHUB_PASSWORD> --docker-email=<EMAIL_ADDRESS>`
 

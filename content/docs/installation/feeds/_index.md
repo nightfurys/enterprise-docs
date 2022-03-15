@@ -65,9 +65,9 @@ MSRC driver requires access to Microsoft Security Update API for raw source data
 
 NOTE: The service may currently require @outlook.com, @live.com or @microsoft.com email address for generating an API key. If you do not have one of these email addresses, you can create a personal outlook account to access this service
 
-Once an API key is available, the feed driver must be enabled and configured to use it
+Once an API key is available, the feed driver must be enabled and configured to use it.
 
-- For quickstart and deployments using docker-compose.yaml: Find the `feeds` service definition and uncomment or add the following environment variables
+- For quickstart and deployments using docker-compose.yaml, find the `feeds` service definition and uncomment or add the following environment variables:
 
     ```YAML
     services:
@@ -80,7 +80,7 @@ Once an API key is available, the feed driver must be enabled and configured to 
         - ANCHORE_ENTERPRISE_FEEDS_MSRC_DRIVER_API_KEY=<api-key>
     ```
 
-- For deployments using config.yaml: Update the `feeds` configuration section
+- For deployments using config.yaml, update the `feeds` configuration section:
 
     ```YAML
     services:
@@ -110,11 +110,11 @@ feeds:
   url: 'http://enterprise-feeds:8228/v1/feeds'
 ```
 
-In this example only operating system vulnerability data is synchronized, however the packages and NVD (for non-os package vulnerability matches) parameter can be set to true to configure Anchore Engine to synchronize NPM and GEM package data.
+In this example, only operating system vulnerability data is synchronized. However, the packages and NVD (for non-os package vulnerability matches) parameter can be set to True to configure Anchore Engine to synchronize NPM and GEM package data.
 
-NOTE: The nvd parameter must be set to true to configure the Anchore Engine to download NVD vulnerability data, which used for matching vulnerabilities in non-operating system packages (NPM, GEM, Python, Java, NuGet).
+NOTE: The nvd parameter must be set to true to configure the Anchore Engine to download NVD vulnerability data, which is used for matching vulnerabilities in non-operating system packages (NPM, GEM, Python, Java, NuGet).
 
-2. Restart Anchore Engine (or just the Policy Engine component containers if you have split services out into their own containers) for the config changes to take effect. If the policy engine cannot reach the configured url it will raise an error and terminate during the bootstrap process. You can check the policy engine logs in /var/log/anchore/anchore-policy-engine.log for errors on the url configuration. If the service start successfully then it was able to reach the Anchore Enterprise Feeds endpoint.
+2. Restart Anchore Engine (or just the Policy Engine component containers if you have split services out into their own containers) for the config changes to take effect. If the policy engine cannot reach the configured URL, it will raise an error and terminate during the bootstrap process. You can check the policy engine logs in /var/log/anchore/anchore-policy-engine.log for errors on the URL configuration. If the service starts successfully, then it was able to reach the Anchore Enterprise Feeds endpoint.
 
 You should now have and Anchore Engine executing feed syncs against the On-Premises Anchore Enterprise Feeds.
 

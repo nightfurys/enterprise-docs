@@ -19,18 +19,20 @@ To install the helm chart, follow these steps:
 
 1. Configure your username, password, Anchore URL and cluster name in the [values file](https://github.com/anchore/anchore-charts/tree/master/stable/kai/values.yaml).
 
-```
-  # Path should not be changed, cluster value is used to tell Anchore which cluster this inventory is coming from
-  kubeconfig:
-    cluster: <unique-name-for-your-cluster>
+kai:
 
-  anchore:
-    url: <URL for your>
+  ```
+    # Path should not be changed, cluster value is used to tell Anchore which cluster this inventory is coming from
+    kubeconfig:
+      cluster: <unique-name-for-your-cluster>
 
-    # Note: reccommend using the inventory-agent role
-    user: <user>
-    password: <password>
-```
+    anchore:
+      url: <URL for your>
+
+      # Note: reccommend using the inventory-agent role
+      user: <user>
+     password: <password>
+  ```
 
 2. Run helm install in the cluster(s) you wish to track 
 ```

@@ -14,13 +14,11 @@ The API is read-only and does not require any authentication.
 
 The Grype feed will be the only feed synced. This feed replaces the other feeds and contains the groups records enabled for your Anchore Enterprise instance.
 
-For legacy feeds, data is organized into 'feeds' and 'groups' within a given feed. A feed is a semantic grouping of data but allows different schemas for the data within each group of the feed and allows for finer-grained updates by allowing clients to select the data of interest.
-
 Examples of feeds:
 
-- vulnerabilities - CVE data from upstream sources such as Debian, Red Hat, Alpine, Ubuntu, and Oracle
-- packages - Metadata and manifests for upstream application packages, such as npmjs.org and rubygems.org
-- nvd - NIST National Vulnerability Database records (CVEs)
+- vulnerabilities - CVE data from upstream sources such as Debian, Red Hat, Alpine, Ubuntu, and Oracle.
+- packages - Metadata and manifests for upstream application packages, such as npmjs.org and rubygems.org.
+- nvd - NIST National Vulnerability Database records (CVEs).
 
 The following examples highlight the routes exposed by the service for querying feed data:
 
@@ -125,12 +123,12 @@ $ curl "http://feeds.example.com:8448/v1/feeds/vulnerabilities/debian:9?next_tok
 
 ### Tasks API
 
-Anchore Feed Service provides a tasks API to track periodic execution of drivers processing feed data from upstream sources. Currently, there are two types of tasks
+Anchore Feed Service provides a tasks API to track periodic execution of drivers processing feed data from upstream sources. Currently, there are the following types of tasks:
 
 * FeedSyncTask - A meta-task that contains the set of DriverExecutionTasks that are run for each periodic update check for upstream data. The task_id of the FeedSyncTask is used as the parent_task_id of its subtasks.
 * DriverExecutionTask - An execution of a single driver which may provide data for one or more feeds and multiple groups of data. The parent_task_id of each record points to the FeedSyncTask that initiated it.
 
-The API can be used to fetch all tasks, a specific task or filter tasks using comma separated criteria. A few examples are listed below 
+The API can be used to fetch all tasks, a specific task, or filter tasks using comma separated criteria. See the following examples: 
 
 * List all tasks
 
@@ -209,9 +207,9 @@ The API can be used to fetch all tasks, a specific task or filter tasks using co
 
 * Fetch a subset of tasks using `filter` query parameter
 
-    * Format for the query parameter is `filter=<parameter><operator><value>,...<parameterN><operatorN><valueN>`
+    * Format for the query parameter is `filter=<parameter><operator><value>,...<parameterN><operatorN><valueN>`.
     * Supported filter parameters are `feed_id`, `driver_id` and `task_type` with `=` operator, and `task_id` with `>` or `<` operators. 
-    * For a detailed view of every task, add `details=True` to the query parameters
+    * For a detailed view of every task, add `details=True` to the query parameters.
 
     ```
     $ curl "http://feeds.example.com:8448/v1/tasks?&details=True&filter=driver_id=centos,task_id>470"

@@ -342,6 +342,63 @@ instruction: The dockerfile instruction to check against. One of:
 }
 ```
 
+### Trigger: packages_added
+This trigger warns if a package was added to the SBOM.
+
+#### Parameters
+Optional parameter: “package_type”
+
+#### Example
+Raise a warning if packages were added.
+
+```
+  {
+   "action": "WARN",
+   "gate": "tag_drift",
+   "trigger": "packages_added",
+   "params": [],
+   "id": "1ba3461f-b9db-4a6c-ac88-329d38e08df5"
+  }
+```
+
+### Trigger: packages_removed
+This trigger warns if a package was deleted from the SBOM.
+
+#### Parameters
+Optional parameter: “package_type”
+
+#### Example
+Raise a warning if packages were deleted.
+
+```
+  {
+   "action": "WARN",
+   "gate": "tag_drift",
+   "trigger": "packages_removed",
+   "params": [],
+   "id": "de05d77b-1f93-4df4-a65d-57d9042b1f3a"
+  }
+```
+
+### Trigger: packages_modified
+This trigger warns if a package was changed in the SBOM.
+
+#### Parameters
+Optional parameter: “package_type”
+
+#### Example
+Raise a warning if packages were changed.
+
+```
+  {
+   "action": "WARN",
+   "gate": "tag_drift",
+   "trigger": "packages_modified",
+   "params": [],
+   "id": "1168b0ac-df6c-4715-8077-2cb3e016cf63"
+  }
+```
+
 ### Trigger: effective_user
 
 This trigger processes all `USER` directives in the dockerfile or history to determine which user will be used to run the container by default (assuming no user is set explicitly at runtime). The detected value is then subject to a whitelist or blacklist filter depending on the configured parameters. Typically, this is used for blacklisting the root user.

@@ -27,6 +27,7 @@ Checks against the content of a dockerfile if provided, or a guessed dockerfile 
 | exposed_ports | Evaluates the set of ports exposed. Allows configuring allowlist or blocklist behavior. If type=whitelist, then any ports found exposed that are not in the list will cause the trigger to fire. If type=blacklist, then any ports exposed that are in the list will cause the trigger to fire. | actual_dockerfile_only | Only evaluate against a user-provided dockerfile, skip evaluation on inferred/guessed dockerfiles. Default is False. | true |
 | no_dockerfile_provided | Triggers if anchore analysis was performed without supplying the actual image Dockerfile. | | | |
 
+
 ### Gate: files
 
 Checks against files in the analyzed image including file content, file names, and filesystem attributes.
@@ -183,6 +184,16 @@ Checks against content and/or presence of files retrieved at analysis time from 
 | scans   | Triggers if any malware scanner has found any matches in the image.  |  |
 | scan_not_run | Triggers if no scan was found for the image. | | 
 
+### Gate: Tag Drift
+
+Compares the SBOM from the evaluated image's tag and the tag's previous image, if found. Provides triggers to detect packages added, removed or modified.
+
+| Trigger Name | Description | Parameter | Description | Example |
+| :----------- | :---------- | :-------- | :---------- | :------ |
+| packages_added | Checks to see if any packages have been added. | package_type | Package type to filter for only specific types. If ommitted, then all types are evaluated. | apk |
+| packages_removed | Checks to see if any packages have been removed. | package_type | Package type to filter for only specific types. If ommitted, then all types are evaluated. | apk |
+| packages_modified | Checks to see if any packages have been modified. | package_type | Package type to filter for only specific types. If ommitted, then all types are evaluated. | apk |
+ | | | |
 
 ### Next Steps
 
