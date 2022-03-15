@@ -33,8 +33,7 @@ The mappings are applied in order, from top to bottom and the system will stop
 at the first match.
 
 **Note**: The trusted images and denylisted images lists take precedence over
-the mapping. See [this
-document]({{< ref "/docs/using/ui_usage/policies/allowed_denied_images" >}}) for
+the mapping. See [Allowed / Denied Images]({{< ref "/docs/using/ui_usage/policies/allowed_denied_images" >}}) for
 details.
 
 If the policy bundle includes no mappings, click the
@@ -60,7 +59,7 @@ for **Name**, **Policy**, **Registry**, **Repository** and **Tag**. The
 Each entry field includes an indicator showing if the current entry is valid
 ![alt text](Check.png) or has errors ![alt text](X.png).
 
-In the screenshot below you can see multiple policy mappings have been defined
+In the following screenshot you can see multiple policy mappings have been defined
 some of which include one or more allowlists.
 
 ![alt text](MultipleMappings.png)

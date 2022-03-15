@@ -38,7 +38,7 @@ image based on the registry, repository name, and tag of the image.
 
    The mappings are applied in order, from top to bottom and the system will stop at the first match.
 
-**Note**: The allowed images and denied images lists take precedence over the mapping. See [this document]({{< ref "/docs/using/ui_usage/policies/allowed_denied_images" >}}) for details.
+**Note**: The allowed images and denied images lists take precedence over the mapping. See [Allowed / Denied Images]({{< ref "/docs/using/ui_usage/policies/allowed_denied_images" >}}) for details.
 
 
 5. The empty policy bundle includes no mappings. Click **Let's add one!** to add your first mapping.
