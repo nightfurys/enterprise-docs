@@ -15,6 +15,7 @@ commits with 'Signed-off-by X' with `git commit -s`.
 ### Installing local tools for development
 
 1. Install [hugo-extended](https://github.com/gohugoio/hugo/releases/), this is necessary because the docsy theme uses some scss functionality only in the extended version.
+    - **NOTE:** Install Hugo Extended v0.90.1. Subsequent versions fail due to deprecated features of the pinned Docsy theme (as of 2022-03-16).
 
 1. Install 'postcss-cli' and 'autoprefixer' using npm:
 `npm install`
