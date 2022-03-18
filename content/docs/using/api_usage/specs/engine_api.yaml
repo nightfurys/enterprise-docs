@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "This is the Anchore Engine API. Provides the primary external API for users of the service."
-  version: "0.1.19"
+  version: "0.1.20"
   title: "Anchore Engine API Server"
   contact:
     email: "nurmi@anchore.com"
@@ -1116,6 +1116,32 @@ paths:
           description: Internal Error
           schema:
             $ref: "#/definitions/ApiErrorResponse"
+  /images/{imageDigest}/sboms/native:
+    get:
+      tags:
+        - Images
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
+      operationId: get_image_sbom_native
+      x-anchore-authz-action: getImage
+      summary: Get image sbom in the native Anchore format
+      produces:
+        - application/gzip
+      parameters:
+        - name: imageDigest
+          in: path
+          type: string
+          required: true
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        200:
+          description: Image lookup success
+          schema:
+            type: file
+        500:
+          description: Internal error
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+
   /images/{imageDigest}/metadata/{mtype}:
     get:
       tags:
@@ -1596,10 +1622,7 @@ paths:
         200:
           description: Policy Language Description
           schema:
-            type: array
-            description: List of Gate specifications
-            items:
-              $ref: "#/definitions/GateSpec"
+            $ref: "#/definitions/GateSpecList"
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
   /system/error_codes:
     get:
@@ -3235,12 +3258,17 @@ definitions:
           $ref: "#/definitions/Whitelist"
       policies:
         description: Policies which define the go/stop/warn status of an image using rule matches on image properties
-        type: "array"
+        type: array
         items:
           $ref: "#/definitions/Policy"
+      source_mappings:
+        description: Mapping rules for defining which policy and whitelist(s) to apply to a source based on a match of the host and repo name. Evaluated in order.
+        type: array
+        items:
+          $ref: "#/definitions/SourceMappingRule"
       mappings:
         description: Mapping rules for defining which policy and whitelist(s) to apply to an image based on a match of the image tag or id. Evaluated in order.
-        type: "array"
+        type: array
         items:
           $ref: "#/definitions/MappingRule"
       whitelisted_images:
@@ -3371,6 +3399,11 @@ definitions:
         type: string
       version:
         type: string
+      artifact_type:
+        type: string
+        enum:
+          - image
+          - source
       rules:
         type: array
         items:
@@ -3393,6 +3426,34 @@ definitions:
         type: string
       image:
         $ref: "#/definitions/ImageRef"
+  SourceMappingRule:
+    type: object
+    required:
+      - name
+      - host
+      - repository
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      whitelist_ids:
+        type: array
+        items:
+          type: string
+      policy_id:
+        type: string
+        description: Optional single policy to evalute, if set will override any value in policy_ids, for backwards compatibility. Generally, policy_ids should be used even with a array of length 1.
+      policy_ids:
+        type: array
+        description: List of policyIds to evaluate in order, to completion
+        items:
+          type: string
+          description: PolicyId to evaluate
+      host:
+        type: string
+      repository:
+        type: string
   MappingRule:
     type: object
     required:
@@ -3551,6 +3612,9 @@ definitions:
           - analyzing
           - analyzed
           - analysis_failed
+      record_version:
+        type: string
+        description: The version of the record, used for internal schema updates and data migrations.
   AnchoreImageList:
     description: A list of Anchore Images
     type: array
@@ -4034,6 +4098,10 @@ definitions:
       description:
         type: string
         description: Description of the error code
+  GateSpecList:
+    type: array
+    items:
+      $ref: "#/definitions/GateSpec"
   GateSpec:
     type: object
     description: A description of the set of gates available in this engine and the triggers and parameters supported
@@ -4044,6 +4112,11 @@ definitions:
       description:
         type: string
         description: Description of the gate
+      supported_artifact_type:
+        type: string
+        enum:
+          - image
+          - source
       state:
         type: string
         description: State of the gate and transitively all triggers it contains if not 'active'
@@ -4937,6 +5010,11 @@ definitions:
   ImageImportManifest:
     x-nullable: True
     type: object
+    required:
+      - tags
+      - contents
+      - digest
+      - operation_uuid
     properties:
       contents:
         $ref: "#/definitions/ImportContentDigests"
@@ -5027,17 +5105,22 @@ definitions:
     additionalProperties: true
     type: object
   ImportDistribution:
-    required:
-      - name
-      - version
-      - idLike
     properties:
       name:
         type: string
+        x-nullable: true
+      id:
+        type: string
+        x-nullable: true
       version:
         type: string
-      idLike:
+        x-nullable: true
+      versionID:
         type: string
+        x-nullable: true
+#  Prior to syft v0.36.0, idLike was a space-separated string.  Now it is a List of strings.  Swagger 2.0 doesn't
+#  support multiple schemas, so for now we will allow the idLike property to be any value to support both schemas.
+      idLike: {}
     additionalProperties: true
     type: object
   ImportPackageLocation:
@@ -5133,3 +5216,6 @@ definitions:
         type: object
     additionalProperties: true
     type: object
+  NativeSbom:
+    type: object
+  AnyValue: {}

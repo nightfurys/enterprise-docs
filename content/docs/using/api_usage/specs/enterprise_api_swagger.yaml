@@ -733,7 +733,924 @@ paths:
           description: Internal Error
           schema:
             $ref: "#/definitions/ApiErrorResponse"
+  /applications:
+    post:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.applications
+      operationId: add_application
+      x-anchore-authz-action: createApplication
+      summary: Create an application
+      description: Create an application
+      produces:
+        - application/json
+      parameters:
+        - name: application
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Application"
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/Application"
+        500:
+          description: Internal Error
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.applications
+      operationId: get_applications
+      x-anchore-authz-action: getApplication
+      description: List all applications
+      summary: List all applications
+      produces:
+        - application/json
+      parameters:
+        - name: include_versions
+          in: query
+          required: false
+          type: boolean
+          default: false
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        200:
+          description: "Applications retrieved successfully"
+          schema:
+            $ref: "#/definitions/ApplicationList"
+        500:
+          description: Internal Error
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+  /applications/{application_id}:
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.applications
+      operationId: get_application
+      x-anchore-authz-action: getApplication
+      summary: Get an application by application_id
+      description: Get an application by application_id
+      produces:
+        - application/json
+      parameters:
+        - name: application_id
+          in: path
+          type: string
+          required: true
+        - name: include_versions
+          in: query
+          required: false
+          type: boolean
+          default: false
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        200:
+          description: "Successfully retrieved application"
+          schema:
+            $ref: "#/definitions/Application"
+        404:
+          description: "Application not found"
+        500:
+          description: Internal Error
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+    put:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.applications
+      operationId: update_application
+      x-anchore-authz-action: updateApplication
+      summary: Update application details
+      description: Updates application details for given application_id
+      produces:
+        - "application/json"
+      parameters:
+        - name: application_id
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Application"
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        200:
+          description: "Application updated successfully"
+          schema:
+            $ref: "#/definitions/Application"
+        404:
+          description: "Application not found"
+        500:
+          description: Internal Error
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+    delete:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.applications
+      operationId: delete_application
+      x-anchore-authz-action: deleteApplication
+      summary: Delete an application by application_id
+      description: Delete an application by application_id
+      produces:
+        - application/json
+      parameters:
+        - name: application_id
+          in: path
+          type: string
+          required: true
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        204:
+          description: "Application deleted successfully"
+  /applications/{application_id}/versions:
+    post:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.applications
+      operationId: add_application_version
+      x-anchore-authz-action: createApplication
+      summary: Create an application version
+      description: Create an application version
+      produces:
+        - application/json
+      parameters:
+        - name: application_id
+          in: path
+          type: string
+          required: true
+        - name: application_version
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/ApplicationVersion"
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/ApplicationVersion"
+        404:
+          description: "Application version not found"
+        500:
+          description: Internal Error
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.applications
+      operationId: get_application_versions
+      x-anchore-authz-action: getApplication
+      summary: List all application verions
+      description: List all application verions
+      produces:
+        - application/json
+      parameters:
+        - name: application_id
+          in: path
+          type: string
+          required: true
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        200:
+          description: "Successfully retrieved application versions"
+          schema:
+            $ref: "#/definitions/ApplicationVersionList"
+        404:
+          description: "Application not found"
+        500:
+          description: Internal Error
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+  /applications/{application_id}/versions/{application_version_id}:
+    put:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.applications
+      operationId: update_application_version
+      x-anchore-authz-action: updateApplication
+      summary: Update application version details
+      description: Updates application version details for given application_id and application_version_id
+      produces:
+        - "application/json"
+      parameters:
+        - name: application_id
+          in: path
+          type: string
+          required: true
+        - name: application_version_id
+          in: path
+          type: string
+          required: true
+        - name: application_version
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/ApplicationVersion"
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        200:
+          description: "Application updated successfully"
+          schema:
+            $ref: "#/definitions/ApplicationVersion"
+        404:
+          description: "Application version not found"
+        500:
+          description: Internal Error
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.applications
+      operationId: get_application_version
+      x-anchore-authz-action: getApplication
+      summary: Get an application version
+      description: Get an application version by application_id and application_version_id
+      produces:
+        - "application/json"
+      parameters:
+        - name: application_id
+          in: path
+          type: string
+          required: true
+        - name: application_version_id
+          in: path
+          type: string
+          required: true
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        200:
+          description: "Successfully retrieved application version"
+          schema:
+            $ref: "#/definitions/ApplicationVersion"
+        404:
+          description: "Application version not found"
+        500:
+          description: Internal Error
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+    delete:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.applications
+      operationId: delete_application_version
+      x-anchore-authz-action: deleteApplication
+      summary: Delete an application version by application_id and application_version_id
+      description: Delete an application version by application_id and application_version_id
+      produces:
+        - application/json
+      parameters:
+        - name: application_id
+          in: path
+          type: string
+          required: true
+        - name: application_version_id
+          in: path
+          type: string
+          required: true
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        204:
+          description: "Application version deleted successfully"
+        404:
+          description: "Application version not found"
+  /applications/{application_id}/versions/{application_version_id}/artifacts:
+    post:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.applications
+      operationId: add_artifact_to_application_version
+      x-anchore-authz-action: updateApplication
+      summary: Add an artifact to an application version
+      description: Add artifact to given application_id and application_version_id
+      produces:
+        - "application/json"
+      parameters:
+        - name: application_id
+          in: path
+          type: string
+          required: true
+        - name: application_version_id
+          in: path
+          type: string
+          required: true
+        - name: artifact_request
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/ArtifactAssociationRequest"
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        200:
+          description: "Artifact successfully added to application version"
+          schema:
+            $ref: "#/definitions/ArtifactAssociationResponse"
+        404:
+          description: "Application version not found"
+        500:
+          description: Internal Error
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.applications
+      operationId: list_artifacts
+      x-anchore-authz-action: getApplication
+      summary: List artifacts present on a given application version
+      description: List artifacts present on a given application version
+      produces:
+        - "application/json"
+      parameters:
+        - name: application_id
+          in: path
+          type: string
+          required: true
+        - name: application_version_id
+          in: path
+          type: string
+          required: true
+        - name: artifact_types
+          in: query
+          type: array
+          required: false
+          items:
+            type: string
+            enum:
+              - source
+              - image
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        200:
+          description: "Successfully retrieved artifacts"
+          schema:
+            $ref: "#/definitions/ArtifactListResponse"
+        404:
+          description: "Application version not found"
+        500:
+          description: Internal Error
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+  /applications/{application_id}/versions/{application_version_id}/artifacts/{association_id}:
+    delete:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.applications
+      operationId: remove_artifact_from_application_version
+      x-anchore-authz-action: deleteApplication
+      summary: Delete an artifact from specified application version
+      description: Delete an artifact from specified application version
+      produces:
+        - application/json
+      parameters:
+        - name: application_id
+          in: path
+          type: string
+          required: true
+        - name: application_version_id
+          in: path
+          type: string
+          required: true
+        - name: association_id
+          in: path
+          type: string
+          required: true
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        204:
+          description: "Artifact successfully removed from application version"
+        500:
+          description: "Internal Error"
+  /applications/{application_id}/versions/{application_version_id}/sboms/json:
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.applications
+      operationId: get_application_version_sbom
+      x-anchore-authz-action: getApplication
+      summary: Get the combined sbom for the given application version, optionally filtered by artifact type
+      description: Get the combined sbom for the given application version, optionally filtered by artifact type
+      produces:
+        - "application/json"
+      parameters:
+        - name: application_id
+          in: path
+          type: string
+          required: true
+        - name: application_version_id
+          in: path
+          type: string
+          required: true
+        - name: artifact_types
+          in: query
+          type: array
+          required: false
+          items:
+            type: string
+            enum:
+              - source
+              - image
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        200:
+          description: "Successfully retrieved combined sbom"
+          schema:
+            $ref: "#/definitions/ApplicationVersionSbom"
+        404:
+          description: "Application version not found"
+        500:
+          description: Internal Error
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+  /imports/sources:
+    post:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.source_imports
+      operationId: create_operation
+      x-anchore-authz-action: importSource
+      summary: "Begin the import of a source code repository analyzed by Syft into the system"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SourceImportOperation"
+        500:
+          description: "Internal Error"
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.source_imports
+      operationId: list_operations
+      x-anchore-authz-action: importSource
+      summary: "Lists in-progress imports"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SourceImportList"
+        500:
+          description: "Internal Error"
+  /imports/sources/{operation_id}:
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.source_imports
+      operationId: get_operation
+      x-anchore-authz-action: importSource
+      summary: "Get detail on a single import"
+      produces:
+        - "application/json"
+      parameters:
+        - name: operation_id
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SourceImportOperation"
+        500:
+          description: "Internal Error"
+    delete:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.source_imports
+      operationId: invalidate_operation
+      x-anchore-authz-action: importSource
+      summary: "Invalidate operation ID so it can be garbage collected"
+      produces:
+        - "application/json"
+      parameters:
+        - name: operation_id
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SourceImportOperation"
+        500:
+          description: "Internal Error"
+  /imports/sources/{operation_id}/sbom:
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.source_imports
+      operationId: get_import_sources_sbom
+      x-anchore-authz-action: importSource
+      summary: "list the packages of an imported source code repository"
+      produces:
+        - "application/json"
+      parameters:
+        - name: operation_id
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SourceImportContentResponse"
+        500:
+          description: "Internal Error"
+    post:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.source_imports
+      operationId: upload_import_sources_sbom
+      x-anchore-authz-action: importSource
+      summary: "Begin the import of a source code repository analyzed by Syft into the system"
+      produces:
+        - "application/json"
+      consumes:
+        - "application/json"
+      parameters:
+        - name: operation_id
+          in: path
+          type: string
+          required: true
+        - name: sbom
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/NativeSBOM"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SourceImportContentResponse"
+        500:
+          description: "Internal Error"
+  /imports/sources/{operation_id}/finalize:
+    post:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.source_imports
+      operationId: finalize_operation
+      x-anchore-authz-action: importSource
+      summary: "Add source records to catalog db"
+      produces:
+        - "application/json"
+      consumes:
+        - "application/json"
+      parameters:
+        - name: operation_id
+          in: path
+          type: string
+          required: true
+        - name: metadata
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/SourceImportMetadata"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SourceManifest"
+        500:
+          description: "Internal Error"
+  /sources:
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.sources
+      operationId: list_sources
+      x-anchore-authz-action: listSources
+      summary: "List the source repository analysis records"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SourcesList"
+        500:
+          description: "Internal Error"
+  /sources/{source_id}:
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.sources
+      operationId: get_source
+      x-anchore-authz-action: getSource
+      summary: "Get a detailed source repository analysis metadata record"
+      produces:
+        - "application/json"
+      parameters:
+        - name: source_id
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SourceManifest"
+        500:
+          description: "Internal Error"
+    delete:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.sources
+      operationId: delete_source
+      x-anchore-authz-action: getSource
+      summary: "Delete source record from DB"
+      description: ""
+      parameters:
+        - name: source_id
+          in: path
+          type: string
+          description: "UUID of source to delete"
+          required: true
+        - name: 'force'
+          in: query
+          type: boolean
+          description: "force delete"
+          required: false
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/SourceManifest"
+        500:
+          description: "Internal Error"
+  /sources/{source_id}/sbom:
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.sources
+      operationId: get_source_sbom_types
+      x-anchore-authz-action: getSource
+      summary: "Get a detailed source repository analysis metadata record"
+      produces:
+        - "application/json"
+      parameters:
+        - name: source_id
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: "success"
+          schema:
+            type: array
+            description: Array of available types
+            items:
+              type: string
+        500:
+          description: "Internal Error"
+  /sources/{source_id}/sbom/native:
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.sources
+      operationId: get_source_sbom_native
+      x-anchore-authz-action: getSource
+      summary: ""
+      produces:
+        - "application/gzip"
+      parameters:
+        - name: source_id
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: "success"
+          schema:
+            type: file
+        500:
+          description: "Internal Error"
+  /sources/{source_id}/content:
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.sources
+      operationId: get_source_content_types
+      x-anchore-authz-action: getSource
+      summary: "Get a detailed source repository analysis metadata record"
+      produces:
+        - "application/json"
+      parameters:
+        - name: source_id
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: "success"
+          schema:
+            type: array
+            description: Array of available types
+            items:
+              type: string
+        500:
+          description: "Internal Error"
+  /sources/{source_id}/content/{content_type}:
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.sources
+      operationId: get_source_content_by_type
+      x-anchore-authz-action: getSource
+      summary: Get the content of an analyzed source repository
+      parameters:
+        - name: source_id
+          in: path
+          type: string
+          required: true
+        - name: content_type
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: Content of specified type from the image
+          schema:
+            $ref: "#/definitions/SourceContentPackageResponse"
+        500:
+          description: Internal error
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+  /sources/{source_id}/vuln:
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.sources
+      operationId: get_source_vulnerability_types
+      x-anchore-authz-action: getSource
+      summary: "Get the available vulnerability types for source"
+      produces:
+        - "application/json"
+      parameters:
+        - name: source_id
+          in: path
+          type: string
+          required: true
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        200:
+          description: List of vulnerability types for the source
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - all
+                - os
+                - non-os
+        500:
+          description: "Internal Error"
+  /sources/{source_id}/vuln/{vtype}:
+    get:
+      x-swagger-router-controller: anchore_enterprise.services.api.controllers.sources
+      operationId: get_source_vulnerabilities
+      x-anchore-authz-action: getSource
+      summary: "Get vulnerabilities for the source by type"
+      produces:
+        - "application/json"
+      parameters:
+        - name: source_id
+          in: path
+          type: string
+          required: true
+        - name: vtype
+          in: path
+          type: string
+          required: true
+        - name: force_refresh
+          in: query
+          type: boolean
+          required: false
+        - name: will_not_fix
+          in: query
+          type: boolean
+          required: false
+          description: "Vulnerability data publishers explicitly won't fix some vulnerabilities. This is captured by will_not_fix attribute of each result. If the query parameter is set, results matching it's value will be filtered. Results are not filtered if the query parameter is unset"
+        - $ref: "#/parameters/AsAccountParameter"
+      responses:
+        200:
+          description: Vulnerability listing for the source
+          schema:
+            $ref: "#/definitions/SourceVulnerabilitiesResponse"
+        500:
+          description: "Internal Error"
+  /sources/{source_id}/check:
+    get:
+      x-anchore-authz-action: getSourceEvaluation
+      x-swagger-router-controller: "anchore_enterprise.services.api.controllers.sources"
+      operationId: "get_source_policy_check"
+      summary: "Fetch or calculate policy evaluation for a source"
+      description: ""
+      parameters:
+        - name: source_id
+          in: path
+          type: string
+          description: "UUID of source to get"
+          required: true
+        - name: policy_id
+          type: string
+          in: query
+          required: false
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "success"
+          schema:
+            $ref: "#/definitions/PolicyEvaluationListResponse"
 definitions:
+  # TODO: fill out PolicyEvaluationListResponse result schema
+  PolicyEvaluationListResponse:
+    type: array
+    items:
+      type: object
+      properties:
+        account_id:
+          type: string
+        policy_id:
+          type: string
+        evaluation_id:
+          type: string
+        source_id:
+          type: string
+        vcs_host:
+          type: string
+        repository_name:
+          type: string
+        final_action:
+          type: string
+        evaluation_url:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        last_updated:
+          type: string
+          format: date-time
+        result:
+          type: object
+  SourceManifest:
+    type: object
+    properties:
+      uuid:
+        type: string
+      account_id:
+        type: string
+      vcs_type:
+        type: string
+      host:
+        type: string
+      repository_name:
+        type: string
+      revision:
+        type: string
+      created_at:
+        type: string
+        format: date-time
+      last_updated:
+        type: string
+        format: date-time
+      analysis_status:
+        type: string
+        enum:
+          - not_analyzed
+          - analyzed
+          - analyzing
+          - analysis_failed
+      source_status:
+        type: string
+        enum:
+          - active
+          - inactive
+          - deleting
+      metadata_records:
+        type: array
+        description: Array of metadata available
+        items:
+          type: object
+          description: Metadata associated with a source upload
+          properties:
+            uuid:
+              type: string
+            ci_workflow_name:
+              type: string
+              x-nullable: True
+            ci_workflow_execution_time:
+              type: string
+              format: date-time
+              x-nullable: True
+            branch_name:
+              type: string
+              x-nullable: True
+            change_author:
+              type: string
+              x-nullable: True
+  SourcesList:
+    type: array
+    items:
+      $ref: "#/definitions/Source"
+  Source:
+    type: object
+    properties:
+      uuid:
+        type: string
+        description: A system-assigned identifier unique for each source analysis
+      account_id:
+        type: string
+        description: The anchore account id that owns this resource
+      host:
+        type: string
+        description: Host name for the repository location (e.g. github.com)
+      repository_name:
+        type: string
+        description: The name of the repository on the host (e.g. 'anchore/anchore-engine')
+      revision:
+        type: string
+        description: The commit ID for a git repository
+      analysis_status:
+        type: string
+        description: The analysis state of the source
+        enum:
+          - not_analyzed
+          - analyzed
+          - analyzing
+          - analysis_failed
+      source_status:
+        type: string
+        description: The state of the source
+        enum:
+          - active
+          - inactive
+          - deleting
+      created_at:
+        type: string
+        format: date-time
+      last_updated:
+        type: string
+        format: date-time
   ApiErrorResponse:
     description: "Generic HTTP API error response"
     type: object
@@ -1296,3 +2213,574 @@ definitions:
         additionalProperties: {
           type: string
         }
+  ApplicationList:
+    type: array
+    description: List of applications
+    items:
+      $ref: "#/definitions/Application"
+  Application:
+    description: A representation of an SLDC application
+    type: object
+    properties:
+      application_id:
+        type: string
+        description: The id of the application
+      name:
+        type: string
+        description: The name of the application
+      description:
+        type: string
+        description: The description of the application
+      application_versions:
+        description: List of versions associated with application
+        $ref: "#/definitions/ApplicationVersionList"
+      created_at:
+        type: string
+        description: RFC 3339 formatted UTC timestamp when the application was created
+        format: date-time
+        example: 2020-10-20T01:20:11.378022Z
+      last_updated:
+        type: string
+        description: RFC 3339 formatted UTC timestamp when the application was last updated
+        format: date-time
+        example: 2020-10-20T01:20:11.378022Z
+  ApplicationVersionList:
+    type: array
+    description: List of application versions
+    items:
+      $ref: "#/definitions/ApplicationVersion"
+  ApplicationVersion:
+    description: A representation of an SLDC application
+    type: object
+    required:
+      - version_name
+    properties:
+      application_version_id:
+        type: string
+        description: The id of the application version
+      application_id:
+        type: string
+        description: The id of the application
+      version_name:
+        type: string
+        description: The name of the application
+      created_at:
+        type: string
+        description: RFC 3339 formatted UTC timestamp when the application was created
+        format: date-time
+        example: 2020-10-20T01:20:11.378022Z
+      last_updated:
+        type: string
+        description: RFC 3339 formatted UTC timestamp when the application was last updated
+        format: date-time
+        example: 2020-10-20T01:20:11.378022Z
+  ArtifactAssociationRequest:
+    description: Request body for an artifact to associate with an application version
+    type: object
+    required:
+      - artifact_type
+      - artifact_keys
+    properties:
+      artifact_type:
+        type: string
+        description: The type of the artifact
+        enum:
+          - image
+          - source
+      artifact_keys:
+        type: object
+        description: A json with key-pair values to query on
+  ArtifactAssociationMetadata:
+    description: Metadata for an artifact association to an application version
+    type: object
+    properties:
+      association_id:
+        type: string
+        description: The id of the association between the application version and the artifact
+      created_at:
+        type: string
+        description: RFC 3339 formatted UTC timestamp when the artifact was associated with the application version
+        format: date-time
+        example: 2020-10-20T01:20:11.378022Z
+      last_updated:
+        type: string
+        description: RFC 3339 formatted UTC timestamp when the artifact association was last updated
+        format: date-time
+        example: 2020-10-20T01:20:11.378022Z
+  ArtifactAssociationResponse:
+    description: Response body for an artifact to associate with an application version. Only one artifact type (matching the value of the type field) will be populated.
+    type: object
+    properties:
+      source:
+        $ref: "#/definitions/Source"
+      image:
+        $ref: "#/definitions/ImageArtifact"
+      artifact_association_metadata:
+        $ref: "#/definitions/ArtifactAssociationMetadata"
+  ImageArtifact:
+    description: Model for an image artifact
+    type: object
+    properties:
+      account_id:
+        type: string
+        description: The account id
+      image_digest:
+        type: string
+        description: The digest of the image
+      distro:
+        type: string
+        description: The distro of the image
+      distro_version:
+        type: string
+        description: The distro version of the image
+      analysis_status:
+        type: string
+        description: the analysis status of image
+      image_status:
+        type: string
+        description: The status of the image
+      analyzed_at:
+        type: string
+        description: RFC 3339 formatted UTC timestamp when the image was analyzed
+        format: date-time
+        example: 2020-10-20T01:20:11.378022Z
+      created_at:
+        type: string
+        description: RFC 3339 formatted UTC timestamp when the image was created
+        format: date-time
+        example: 2020-10-20T01:20:11.378022Z
+      last_updated:
+        type: string
+        description: RFC 3339 formatted UTC timestamp when the image was last updated
+        format: date-time
+        example: 2020-10-20T01:20:11.378022Z
+  AssociatedImageArtifact:
+    description: Model for an associated image artifact. Composites the artifact with the association metadata
+    type: object
+    properties:
+      artifact_association_metadata:
+        $ref: "#/definitions/ArtifactAssociationMetadata"
+      image:
+        $ref: "#/definitions/ImageArtifact"
+  AssociatedSourceArtifact:
+    description: Model for an associated source artifact. Composite of the source artifact and its asssociation metadata
+    type: object
+    properties:
+      artifact_association_metadata:
+        $ref: "#/definitions/ArtifactAssociationMetadata"
+      source:
+        $ref: "#/definitions/Source"
+  ArtifactListResponse:
+    description: The response provided when querying for the artifacts on an application version
+    type: object
+    properties:
+      associated_source_artifacts:
+        type: array
+        items:
+          $ref: "#/definitions/AssociatedSourceArtifact"
+      associated_image_artifacts:
+        type: array
+        items:
+          $ref: "#/definitions/AssociatedImageArtifact"
+  ApplicationVersionSbom:
+    description: A combined sbom for the artifacts associated with an application version
+    type: object
+    properties:
+      application:
+        $ref: "#/definitions/Application"
+      application_version:
+        $ref: "#/definitions/ApplicationVersion"
+      created_at:
+        type: string
+        description: RFC 3339 formatted UTC timestamp when the application version sbom was created
+        format: date-time
+        example: 2020-10-20T01:20:11.378022Z
+      source_sboms:
+        type: array
+        items:
+          type: object
+      image_sboms:
+        type: array
+        items:
+          type: object
+  SourceImportOperation:
+      type: object
+      description: An import record, creating a unique identifier for referencing the operation as well as its state
+      properties:
+        uuid:
+          type: string
+        status:
+          type: string
+          enum:
+            - pending
+            - queued
+            - processing
+            - complete
+            - failed
+            - expired
+        expires_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        last_updated:
+          type: string
+          format: date-time
+  SourceImportList:
+      type: array
+      items:
+        $ref: "#/definitions/SourceImportOperation"
+  NativeSBOM:
+    required:
+      - artifacts
+      - source
+      - distro
+    properties:
+      artifacts:
+        items:
+          "$ref": "#/definitions/NativeSBOMPackage"
+        type: array
+      source:
+        "$ref": "#/definitions/NativeSBOMSource"
+      distro:
+        "$ref": "#/definitions/NativeSBOMDistribution"
+      descriptor:
+        "$ref": "#/definitions/NativeSBOMDescriptor"
+      schema:
+        "$ref": "#/definitions/NativeSBOMSchema"
+      artifactRelationships:
+        items:
+          "$ref": "#/definitions/NativeSBOMPackageRelationship"
+        type: array
+    additionalProperties: true
+    type: object
+  NativeSBOMDescriptor:
+    required:
+      - name
+      - version
+    properties:
+      name:
+        type: string
+      version:
+        type: string
+    additionalProperties: true
+    type: object
+  NativeSBOMDistribution:
+    properties:
+      name:
+        type: string
+        x-nullable: true
+      id:
+        type: string
+        x-nullable: true
+      version:
+        type: string
+        x-nullable: true
+      versionID:
+        type: string
+        x-nullable: true
+#  Prior to syft v0.36.0, idLike was a space-separated string.  Now it is a List of strings.  Swagger 2.0 doesn't
+#  support multiple schemas, so for now we will allow the idLike property to be any value to support both schemas.
+      idLike: {}
+    additionalProperties: true
+    type: object
+  NativeSBOMPackageLocation:
+    required:
+      - path
+    properties:
+      path:
+        type: string
+      layerID:
+        type: string
+    additionalProperties: true
+    type: object
+  NativeSBOMPackage:
+    required:
+      - name
+      - version
+      - type
+      - locations
+      - licenses
+      - language
+      - cpes
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      version:
+        type: string
+      type:
+        type: string
+      foundBy:
+        type: string
+      locations:
+        items:
+          "$schema": http://json-schema.org/draft-04/schema#
+          "$ref": "#/definitions/NativeSBOMPackageLocation"
+        type: array
+      licenses:
+        items:
+          type: string
+        type: array
+      language:
+        type: string
+      cpes:
+        items:
+          type: string
+        type: array
+      purl:
+        type: string
+      metadataType:
+        type: string
+        x-nullable: true
+      metadata:
+        type: object
+        x-nullable: true
+    additionalProperties: true
+    type: object
+  NativeSBOMSchema:
+    required:
+      - version
+      - url
+    properties:
+      version:
+        type: string
+      url:
+        type: string
+    additionalProperties: true
+    type: object
+  NativeSBOMSource:
+    required:
+      - type
+      - target
+    properties:
+      type:
+        type: string
+      target:
+        additionalProperties: true
+    additionalProperties: true
+    type: object
+  NativeSBOMPackageRelationship:
+    required:
+      - parent
+      - child
+      - type
+    properties:
+      parent:
+        type: string
+      child:
+        type: string
+      type:
+        type: string
+      metadata:
+        additionalProperties: true
+        type: object
+    additionalProperties: true
+    type: object
+  SourceImportContentResponse:
+    type: object
+    properties:
+      digest:
+        type: string
+      created_at:
+        type: string
+        format: date-time
+  SourceImportMetadata:
+    type: object
+    required:
+      - host
+      - repository_name
+      - revision
+      - contents
+    properties:
+      ci_workflow_name:
+        x-nullable: true
+        type: string
+      ci_workflow_execution_time:
+        x-nullable: true
+        type: string
+        format: date-time
+      host:
+        type: string
+      repository_name:
+        type: string
+      branch_name:
+        x-nullable: true
+        type: string
+      revision:
+        type: string
+      change_author:
+        x-nullable: true
+        type: string
+      contents:
+        type: object
+        required:
+          - sbom
+        description: Digest of content to use in the final import
+        properties:
+          sbom:
+            type: string
+            description: Digest to use for the sbom
+  ContentJAVAPackageResponse:
+    type: object
+    description: "Java package content listings from images"
+    properties:
+      imageDigest:
+        type: string
+      content_type:
+        type: string
+      content:
+        type: array
+        items:
+          type: object
+          properties:
+            package:
+              type: string
+            implementation-version:
+              type: string
+            specification-version:
+              type: string
+            maven-version:
+              type: string
+            location:
+              type: string
+            type:
+              type: string
+            origin:
+              type: string
+            cpes:
+              type: array
+              items:
+                type: string
+              description: A list of Common Platform Enumerations that may uniquely identify the package
+  SourceContentPackageResponse:
+    type: object
+    description: "Package content listings from analysis sbom"
+    properties:
+      source_id:
+        type: string
+      content_type:
+        type: string
+      content:
+        type: array
+        items:
+          type: object
+          properties:
+            package:
+              type: string
+            version:
+              type: string
+            size:
+              type: string
+            type:
+              type: string
+            origin:
+              type: string
+            license:
+              type: string
+              description: Deprecated in favor of the 'licenses' field"
+            licenses:
+              type: array
+              items:
+                type: string
+            location:
+              type: string
+            cpes:
+              type: array
+              items:
+                type: string
+              description: A list of Common Platform Enumerations that may uniquely identify the package
+  ContentFilesResponse:
+    type: object
+    description: "File content listings from images"
+    properties:
+      imageDigest:
+        type: string
+      content_type:
+        type: string
+      content:
+        type: array
+        items:
+          type: object
+          properties:
+            filename:
+              type: string
+            gid:
+              type: integer
+            linkdest:
+              type: string
+              x-nullable: True
+            mode:
+              type: string
+            sha256:
+              type: string
+              x-nullable: True
+            size:
+              type: integer
+            type:
+              type: string
+            uid:
+              type: integer
+  Vulnerability:
+    type: object
+    properties:
+      vuln:
+        type: string
+        description: The vulnerability identifier, such as CVE-2017-100, or RHSA-2017123
+      fix:
+        type: string
+        description: The package containing a fix, if available
+      severity:
+        type: string
+        description: The severity of the vulnerability
+      package:
+        type: string
+        description: The package name and version that are vulnerable in the image
+      url:
+        type: string
+        description: The url for more information about the vulnerability
+      feed:
+        type: string
+        description: The name of the feed where vulnerability match was made
+      feed_group:
+        type: string
+        description: The name of the feed group where vulnerability match was made
+      package_name:
+        type: string
+        description: The name of the vulnerable package artifact
+      package_version:
+        type: string
+        description: The version of the vulnerable package artifact
+      package_type:
+        type: string
+        description: The type of vulnerable package
+      package_cpe:
+        type: string
+        description: The CPE string (if applicable) describing the package to vulnerability match
+      package_path:
+        type: string
+        description: The location (if applicable) of the vulnerable package in the container filesystem
+      will_not_fix:
+        type: boolean
+        description: Whether a vendor will fix or not fix the vulnerability
+      nvd_data:
+        $ref: "#/definitions/NvdDataList"
+      vendor_data:
+        $ref: "#/definitions/VendorDataList"
+  VulnerabilityList:
+    type: array
+    description: List of Vulnerability objects
+    items:
+      $ref: "#/definitions/Vulnerability"
+  SourceVulnerabilitiesResponse:
+    description: "Envelope containing list of vulnerabilities for a source repo"
+    type: object
+    properties:
+      source_id:
+        type: string
+      vulnerability_type:
+        type: string
+      vulnerabilities:
+        $ref: "#/definitions/VulnerabilityList"
